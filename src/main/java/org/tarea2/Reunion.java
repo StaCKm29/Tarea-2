@@ -11,7 +11,7 @@ abstract class Reunion {
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio;
-    private Instant horaFin = Instant.now();
+    private Instant horaFin;
 
     /**
      * Constructor de la clase Reunion
