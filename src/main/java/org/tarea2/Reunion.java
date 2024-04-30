@@ -24,7 +24,7 @@ abstract class Reunion {
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
     }
-    
+
     public abstract List obtenerAsistencias();
     public abstract List obtenerAusencias();
     public abstract List obtenerRetrasos();
