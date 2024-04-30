@@ -3,7 +3,6 @@ package org.tarea2;
 import java.util.Date;
 import java.time.Instant;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 abstract class Reunion {
