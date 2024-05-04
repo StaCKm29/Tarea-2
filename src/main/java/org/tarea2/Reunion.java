@@ -12,7 +12,10 @@ abstract class Reunion {
     private Instant horaInicio;
     private Instant horaFin;
     private Duration duracionReal;
+    private TipoReunion tipoReunion;    
     private Empleado organizador;
+    private int totalAsistentes;
+    private float porcentajeAsistencia;
     private List <Empleado> listaInvitados;
     private List <Empleado> listaAsistentes;
     private List <Empleado> listaAusentes;
@@ -20,7 +23,8 @@ abstract class Reunion {
     private List <Nota> almacenNotas;
 
 
-    public Reunion(Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
+    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
+        this.tipoReunion = TipoReunion.values()[tipoReunion];
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
@@ -43,10 +47,12 @@ abstract class Reunion {
 
     }
     public int obtenerTotalAsistencia(){
-
+        totalAsistentes = listaAsistentes.size();
+        return totalAsistentes;
     }
     public float obtenerPorcentajeAsistencia(){
-
+        porcentajeAsistencia = (totalAsistentes/listaInvitados.size())*100;
+        return porcentajeAsistencia;
     }
     public Duration calcularTiempoReal(){
         duracionReal = Duration.between(horaInicio, horaFin);
