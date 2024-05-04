@@ -43,7 +43,7 @@ abstract class Reunion {
         return asistencia.getPresentes();
     }
     public List obtenerAusencias(){
-        return asistencia.getAusentes()
+        return asistencia.getAusentes();
     }
     public List obtenerRetrasos(){
         return asistencia.getAtrasados();
