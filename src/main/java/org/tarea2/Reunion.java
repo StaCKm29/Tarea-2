@@ -12,7 +12,10 @@ abstract class Reunion {
     private Instant horaInicio;
     private Instant horaFin;
     private Duration duracionReal;
+    private TipoReunion tipoReunion;
     private Empleado organizador;
+    private int totalAsistentes;
+    private float porcentajeAsistencia;
     private List <Empleado> listaInvitados;
     private List <Empleado> listaAsistentes;
     private List <Empleado> listaAusentes;
@@ -27,7 +30,6 @@ abstract class Reunion {
         this.duracionPrevista = duracionPrevista;
         this.listaInvitados = listaInvitados;
         this.organizador = listaInvitados.getFirst();
-        this.asistencia = new Asistencia(listaInvitados);
 
         Invitacion invitacion = new Invitacion(horaPrevista);
         for (Empleado empleado : listaInvitados) {
@@ -36,15 +38,16 @@ abstract class Reunion {
     }
 
     public List obtenerAsistencias(){
-        return asistencia.getPresentes();
+
     }
     public List obtenerAusencias(){
-        return asistencia.getAusentes()
+
     }
     public List obtenerRetrasos(){
-        return asistencia.getAtrasados();
+
     }
     public int obtenerTotalAsistencia(){
+
     }
     public float obtenerPorcentajeAsistencia(){
 
@@ -62,11 +65,5 @@ abstract class Reunion {
     }
     public void finalizar(){
         horaFin = Instant.now();
-        asistencia.encontrarAusetes();
-    }
-
-    public void asiste(Empleado juan){
-        Instant horallegada = Instant.now();
-        asistencia.addAsistente(juan, horaInicio, horallegada);
     }
 }
