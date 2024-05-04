@@ -24,12 +24,14 @@ abstract class Reunion {
     private Asistencia asistencia;
 
 
-    public Reunion(Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
+    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
+        this.tipoReunion = TipoReunion.values()[tipoReunion];
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.listaInvitados = listaInvitados;
         this.organizador = listaInvitados.getFirst();
+        this.asistencia = new Asistencia(listaInvitados);
 
         Invitacion invitacion = new Invitacion(horaPrevista);
         for (Empleado empleado : listaInvitados) {
@@ -38,19 +40,21 @@ abstract class Reunion {
     }
 
     public List obtenerAsistencias(){
-
+        return asistencia.getPresentes();
     }
     public List obtenerAusencias(){
-
+        return asistencia.getAusentes()
     }
     public List obtenerRetrasos(){
-
+        return asistencia.getAtrasados();
     }
     public int obtenerTotalAsistencia(){
-
+        totalAsistentes = listaAsistentes.size();
+        return totalAsistentes;
     }
     public float obtenerPorcentajeAsistencia(){
-
+        porcentajeAsistencia = (totalAsistentes/listaInvitados.size())*100;
+        return porcentajeAsistencia;
     }
     public Duration calcularTiempoReal(){
         duracionReal = Duration.between(horaInicio, horaFin);
@@ -65,5 +69,11 @@ abstract class Reunion {
     }
     public void finalizar(){
         horaFin = Instant.now();
+        asistencia.encontrarAusetes();
+    }
+
+    public void asiste(Empleado juan){
+        Instant horallegada = Instant.now();
+        asistencia.addAsistente(juan, horaInicio, horallegada);
     }
 }
