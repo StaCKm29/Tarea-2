@@ -46,10 +46,15 @@ public class Main {
         R.nuevaNota("Primera nota");
         R.nuevaNota("Segunda nota");
         R.nuevaNota("Tercera nota");
+        R.asiste(empleado4);
         R.finalizar();
         System.out.println("Duración real: " + R.calcularTiempoReal());
-
-
+        System.out.println("Total asistentes: " + R.obtenerTotalAsistencia());
+        System.out.println("Total de empleados: " + listaInvitados.size());
+        System.out.println("Porcentaje de asistencia: " + R.obtenerPorcentajeAsistencia());
+        System.out.println("Asistentes: " + R.obtenerAsistencias());
+        System.out.println("Ausentes: " + R.obtenerAusencias());
+        System.out.println("Retrasados: " + R.obtenerRetrasos());
 
 
     }

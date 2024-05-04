@@ -3,6 +3,7 @@ package org.tarea2;
 import java.util.Date;
 import java.time.Instant;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 abstract class Reunion {
@@ -17,9 +18,6 @@ abstract class Reunion {
     private int totalAsistentes;
     private float porcentajeAsistencia;
     private List <Empleado> listaInvitados;
-    private List <Empleado> listaAsistentes;
-    private List <Empleado> listaAusentes;
-    private List <Empleado> listaAtrasados;
     private List <Nota> almacenNotas;
     private Asistencia asistencia;
 
@@ -32,6 +30,7 @@ abstract class Reunion {
         this.listaInvitados = listaInvitados;
         this.organizador = listaInvitados.getFirst();
         this.asistencia = new Asistencia(listaInvitados);
+        this.almacenNotas = new ArrayList<Nota>();
 
         Invitacion invitacion = new Invitacion(horaPrevista);
         for (Empleado empleado : listaInvitados) {
@@ -49,11 +48,11 @@ abstract class Reunion {
         return asistencia.getAtrasados();
     }
     public int obtenerTotalAsistencia(){
-        totalAsistentes = listaAsistentes.size();
+        totalAsistentes = asistencia.getPresentes().size();
         return totalAsistentes;
     }
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = (totalAsistentes/listaInvitados.size())*100;
+        porcentajeAsistencia = (float) (totalAsistentes/listaInvitados.size())*100;
         return porcentajeAsistencia;
     }
     public Duration calcularTiempoReal(){

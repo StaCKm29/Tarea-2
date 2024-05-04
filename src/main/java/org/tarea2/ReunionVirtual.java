@@ -3,6 +3,7 @@ package org.tarea2;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 public class ReunionVirtual extends Reunion{
     private String enlace; // URL de la reunión
@@ -14,8 +15,8 @@ public class ReunionVirtual extends Reunion{
      * @param duracionPrevista
      * @param enlace
      */
-    public ReunionVirtual(Date fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
-        super(fecha, horaPrevista, duracionPrevista);
+    public ReunionVirtual(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitado, String enlace){
+        super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitado);
         this.enlace = enlace;
     }
 }

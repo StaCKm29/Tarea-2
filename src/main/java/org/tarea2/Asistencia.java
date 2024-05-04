@@ -21,6 +21,7 @@ public class Asistencia {
             horaDeAtraso.add(null);
         }
         this.ausentes = new ArrayList<>();
+        this.presentes = new ArrayList<>();
     }
 
     public void addAsistente(Empleado juan, Instant inicio, Instant llegada){
