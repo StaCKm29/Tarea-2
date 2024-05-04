@@ -52,6 +52,10 @@ abstract class Reunion {
         duracionReal = Duration.between(horaInicio, horaFin);
         return duracionReal;
     }
+    public void nuevaNota(String mensaje){
+        Nota nota = new Nota(mensaje);
+        almacenNotas.add(nota);
+    }
     public void iniciar(){
         horaInicio = Instant.now();
     }
