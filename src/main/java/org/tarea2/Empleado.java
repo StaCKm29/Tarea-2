@@ -32,5 +32,8 @@ public class Empleado implements Invitable{
     public void invitar(Instant hora) {
         System.out.println("Invitando a " + nombre + " " + apellidos + " a las " + hora.toString() + " al evento.");
     }
-
+    @Override
+    public String toString() {
+        return "Empleado: " + nombre + " " + apellidos + " (" + id + ")";
+    }
 }

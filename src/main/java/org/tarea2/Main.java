@@ -52,6 +52,10 @@ public class Main {
         System.out.println("Total asistentes: " + R.obtenerTotalAsistencia());
         System.out.println("Total de empleados: " + listaInvitados.size());
         System.out.println("Porcentaje de asistencia: " + R.obtenerPorcentajeAsistencia());
+        //hacer el sout de cada empleado
+        for(Empleado em : (List <Empleado>) R.obtenerAsistencias()) {
+            System.out.println(em); //automatico para el toString
+        }
         System.out.println("Asistentes: " + R.obtenerAsistencias());
         System.out.println("Ausentes: " + R.obtenerAusencias());
         System.out.println("Retrasados: " + R.obtenerRetrasos());
