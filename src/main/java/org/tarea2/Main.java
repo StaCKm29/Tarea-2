@@ -46,7 +46,7 @@ public class Main {
         R.nuevaNota("Primera nota");
         R.nuevaNota("Segunda nota");
         R.nuevaNota("Tercera nota");
-        R.asiste(empleado4);
+        R.empleadoEntrando(empleado4);
         R.finalizar();
         System.out.println("Duración real: " + R.calcularTiempoReal());
         System.out.println("Total asistentes: " + R.obtenerTotalAsistencia());

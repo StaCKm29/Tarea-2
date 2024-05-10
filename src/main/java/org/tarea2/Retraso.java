@@ -4,8 +4,15 @@ import java.time.Instant;
 import java.util.List;
 
 public class Retraso extends Asistencia{
-    private Instant hora = Instant.now();
-    public Retraso(List empleados) {
-        super(empleados);
+    private Instant hora;
+    private Empleado em;
+    public Retraso(Empleado em, Instant hora) {
+        super(em);
+        this.hora = hora;
+    }
+
+    @Override
+    public Empleado getEmpleado() {
+        return super.getEmpleado();
     }
 }
