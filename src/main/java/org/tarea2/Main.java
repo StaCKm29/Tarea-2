@@ -58,7 +58,8 @@ public class Main {
         }
         System.out.println("Asistentes: " + R.obtenerAsistencias());
         System.out.println("Ausentes: " + R.obtenerAusencias());
-        System.out.println("Retrasados: " + R.obtenerRetrasos());
+        System.out.println("Retrasos: " + R.obtenerRetrasos());
+
 
 
     }

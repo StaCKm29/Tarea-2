@@ -71,8 +71,8 @@ abstract class Reunion {
         asistencia.encontrarAusetes();
     }
 
-    public void asiste(Empleado juan){
+    public void asiste(Empleado em){
         Instant horallegada = Instant.now();
-        asistencia.addAsistente(juan, horaInicio, horallegada);
+        asistencia.addAsistente(em, horaInicio, horallegada);
     }
 }

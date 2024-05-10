@@ -18,8 +18,5 @@ public class Invitacion {
     public void enviarInvitacion(Invitable invitado) {
         invitado.invitar(hora);
     }
-
-    public Instant getHora(){
-        return hora;
-    }
+    
 }
