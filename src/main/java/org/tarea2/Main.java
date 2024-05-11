@@ -48,6 +48,7 @@ public class Main {
         R.nuevaNota("Tercera nota");
         R.empleadoEntrando(empleado4);
         R.finalizar();
+
         System.out.println("Duración real: " + R.calcularTiempoReal());
         System.out.println("Total asistentes: " + R.obtenerTotalAsistencia());
         System.out.println("Total de empleados: " + listaInvitados.size());
@@ -59,8 +60,6 @@ public class Main {
         System.out.println("Asistentes: " + R.obtenerAsistencias());
         System.out.println("Ausentes: " + R.obtenerAusencias());
         System.out.println("Retrasos: " + R.obtenerRetrasos());
-
-
 
     }
 }

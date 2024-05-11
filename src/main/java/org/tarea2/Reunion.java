@@ -10,7 +10,7 @@ abstract class Reunion {
     private Date fecha;
     private Instant horaPrevista;
     private Duration duracionPrevista;
-    private Instant horaInicio;
+    private Instant horaInicio = null;
     private Instant horaFin;
     private Duration duracionReal;
     private TipoReunion tipoReunion;
@@ -34,6 +34,11 @@ abstract class Reunion {
         this.listaInvitados = listaInvitados;
         this.organizador = listaInvitados.getFirst();
         this.almacenNotas = new ArrayList<>();
+        this.totalAsistencias = new ArrayList<>();
+        this.empleadosAsistentes = new ArrayList<>();
+        this.empleadosAtrasados = new ArrayList<>();
+        this.empleadosAusentes = new ArrayList<>();
+        this.retrasos = new ArrayList<>();
         this.totalAsistencias = new ArrayList<>();
         Invitacion invitacion = new Invitacion();
         for (Empleado empleado : listaInvitados) {
