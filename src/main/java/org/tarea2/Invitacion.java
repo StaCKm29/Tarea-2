@@ -8,8 +8,8 @@ import java.time.Instant;
 public class Invitacion {
     private Instant hora;
 
-    public Invitacion(Instant hora) {
-        this.hora = hora;
+    public Invitacion() {
+        this.hora = Instant.now();
     }
     /**
      * Metodo que envia una invitación a un invitado.
@@ -18,8 +18,5 @@ public class Invitacion {
     public void enviarInvitacion(Invitable invitado) {
         invitado.invitar(hora);
     }
-
-    public Instant getHora(){
-        return hora;
-    }
+    
 }

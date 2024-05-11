@@ -46,7 +46,7 @@ public class Main {
         R.nuevaNota("Primera nota");
         R.nuevaNota("Segunda nota");
         R.nuevaNota("Tercera nota");
-        R.asiste(empleado4);
+        R.empleadoEntrando(empleado4);
         R.finalizar();
         System.out.println("Duración real: " + R.calcularTiempoReal());
         System.out.println("Total asistentes: " + R.obtenerTotalAsistencia());
@@ -58,7 +58,8 @@ public class Main {
         }
         System.out.println("Asistentes: " + R.obtenerAsistencias());
         System.out.println("Ausentes: " + R.obtenerAusencias());
-        System.out.println("Retrasados: " + R.obtenerRetrasos());
+        System.out.println("Retrasos: " + R.obtenerRetrasos());
+
 
 
     }
