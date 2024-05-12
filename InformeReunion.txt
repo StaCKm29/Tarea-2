@@ -1,0 +1,7 @@
+Informe de la reunion
+Fecha y hora de la reunión: Fri May 10 00:00:00 CLT 2024 2024-05-10T13:00:00Z
+El tipo de reunión fue: MARKETING
+La sala de la reunión es: Sala 1
+Lista de Participantes: 
+Notas relacionadas a la reunión: 
+[Nota 1, Nota 2, Nota 3]

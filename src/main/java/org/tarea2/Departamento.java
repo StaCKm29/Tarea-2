@@ -6,7 +6,7 @@ import java.time.Instant;
 /**Clase que representa un departamento de la empresa.*/
 public class Departamento implements Invitable{
     private String nombre;
-    private List <Empleado> empleados = new ArrayList<Empleado>();
+    private List <Empleado> empleados = new ArrayList<>();
 
     /**
      * Constructor de la clase Departamento

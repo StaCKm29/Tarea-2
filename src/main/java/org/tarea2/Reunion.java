@@ -125,4 +125,29 @@ abstract class Reunion {
         }
         return mensajes.toString();
     }
+
+    public Date getFecha(){
+        return fecha;
+    }
+    public Instant getHoraPrevista(){
+        return horaPrevista;
+    }
+
+    public Instant getHoraInicio(){
+        return horaInicio;
+    }
+
+    public Instant getHoraFin(){
+        return horaFin;
+    }
+
+    public Duration getDuracionReal(){
+        return duracionReal;
+    }
+
+    public TipoReunion getTipoReunion(){
+        return tipoReunion;
+    }
+
+    public abstract String getSalaEnlace();
 }

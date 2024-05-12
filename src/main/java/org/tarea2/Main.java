@@ -28,5 +28,8 @@ public class Main {
         reunion.nuevaNota("Nota 3");
         System.out.println(reunion.getNotas());
 
+        escribirInforme informe = new escribirInforme();
+        informe.generarInforme(reunion);
+
     }
 }
