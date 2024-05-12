@@ -3,27 +3,19 @@ import java.io.*;
 public class escribirInforme {
     public void generarInforme(Reunion reunion){
         try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("InformeReunion.txt"));
+            FileWriter writer = new FileWriter("Informe.txt");
             writer.write("Informe de la reunion");
-            writer.newLine();
             writer.write("Fecha y hora de la reunión: " + reunion.getFecha() + " " + reunion.getHoraPrevista());
-            writer.newLine();
             writer.write("El tipo de reunión fue: " + reunion.getTipoReunion());
-            writer.newLine();
             writer.write(reunion.getSalaEnlace());
-            writer.newLine();
             writer.write("Lista de Participantes: ");
-            writer.newLine();
             for (Object empleado : reunion.obtenerAsistencias()){
                 writer.write(empleado.toString());
-                writer.newLine();
             }
             writer.write("Notas relacionadas a la reunión: ");
-            writer.newLine();
             writer.write(reunion.getNotas());
             writer.close();
-
-
+            System.out.println("Se ha creado el archivo correctamente.");
         }
         catch (IOException e){
             e.printStackTrace();
