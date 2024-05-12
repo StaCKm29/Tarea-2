@@ -10,7 +10,7 @@ abstract class Reunion {
     private Date fecha;
     private Instant horaPrevista;
     private Duration duracionPrevista;
-    private Instant horaInicio;
+    private Instant horaInicio = null;
     private Instant horaFin;
     private Duration duracionReal;
     private TipoReunion tipoReunion;
@@ -24,6 +24,7 @@ abstract class Reunion {
     private List <Nota> almacenNotas;
     private List <Asistencia> totalAsistencias;
     private List <Retraso> retrasos;
+    private List <String> mensajes;
 
 
     public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
@@ -35,6 +36,11 @@ abstract class Reunion {
         this.organizador = listaInvitados.getFirst();
         this.almacenNotas = new ArrayList<>();
         this.totalAsistencias = new ArrayList<>();
+        this.empleadosAsistentes = new ArrayList<>();
+        this.empleadosAtrasados = new ArrayList<>();
+        this.empleadosAusentes = new ArrayList<>();
+        this.retrasos = new ArrayList<>();
+        this.totalAsistencias = new ArrayList<>();
         Invitacion invitacion = new Invitacion();
         for (Empleado empleado : listaInvitados) {
             invitacion.enviarInvitacion(empleado);
@@ -42,32 +48,33 @@ abstract class Reunion {
     }
 
     public List obtenerAsistencias(){
-        Empleado em;
-        for(Asistencia asistir : totalAsistencias){
-            em = asistir.getEmpleado();
-            empleadosAsistentes.add(em);
+        for (Asistencia as : totalAsistencias){
+            empleadosAsistentes.add(as.getEmpleado());
         }
         return empleadosAsistentes;
     }
-    public List obtenerAusencias(){
-        for (Empleado em : listaInvitados){
-            if(listaInvitados.contains(em)){
-                if(empleadosAusentes.contains(em)){
-                    empleadosAusentes.remove(em);
-                }else{
-                    empleadosAusentes.add(null);
+    public List obtenerAusencias() {
+        for (Empleado empleado : listaInvitados) {
+            boolean asistio = false;
+            for (Asistencia asistencia : totalAsistencias) {
+                if (asistencia.getEmpleado().equals(empleado)) {
+                    if(empleadosAusentes.contains(empleado)){
+                        empleadosAusentes.remove(empleado);
+                    }
+                    asistio = true;
+                    break;
                 }
-            } else {
-                empleadosAusentes.add(em);
+            }
+            if (!asistio) {
+                empleadosAusentes.add(empleado);
             }
         }
-        return empleadosAtrasados;
+        return empleadosAusentes;
     }
+
     public List obtenerRetrasos(){
-        Empleado em;
         for(Retraso retraso : retrasos){
-            em = retraso.getEmpleado();
-            empleadosAtrasados.add(em);
+            empleadosAtrasados.add(retraso.getEmpleado());
         }
         return empleadosAtrasados;
     }
@@ -75,17 +82,16 @@ abstract class Reunion {
         return totalAsistentes;
     }
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = (float) (totalAsistentes/listaInvitados.size())*100;
+        porcentajeAsistencia = ((float)totalAsistentes/listaInvitados.size())*100;
+        String porcentajeString = String.valueOf(porcentajeAsistencia).replace(',', '.');
+        porcentajeAsistencia = Float.parseFloat(porcentajeString);
         return porcentajeAsistencia;
     }
     public Duration calcularTiempoReal(){
         duracionReal = Duration.between(horaInicio, horaFin);
         return duracionReal;
     }
-    public void nuevaNota(String mensaje){
-        Nota nota = new Nota(mensaje);
-        almacenNotas.add(nota);
-    }
+
     public void iniciar(){
         horaInicio = Instant.now();
     }
@@ -94,7 +100,6 @@ abstract class Reunion {
     }
 
     public void empleadoEntrando(Empleado em){
-        Instant horallegada = Instant.now();
         Asistencia asistio;
         if(horaInicio == null){
             asistio = new Asistencia(em);
@@ -107,9 +112,17 @@ abstract class Reunion {
         }
         totalAsistentes++;
     }
-    public void getNotas(){
+
+    public void nuevaNota(String mensaje){
+        Nota nota = new Nota(mensaje);
+        almacenNotas.add(nota);
+    }
+
+    public String getNotas(){
+        mensajes = new ArrayList<>();
         for(Nota notita : almacenNotas){
-            notita.getMensaje();
+             mensajes.add(notita.getMensaje());
         }
+        return mensajes.toString();
     }
 }
