@@ -1,9 +1,10 @@
 package org.tarea2;
 import java.io.*;
 public class escribirInforme {
+    private String nombreArchivo;
     public void generarInforme(Reunion reunion){
         try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("InformeReunion.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo + ".txt"));
             writer.write("Informe de la reunion");
             writer.newLine();
             writer.write("Fecha y hora de la reunión: " + reunion.getFecha() + " " + reunion.getHoraPrevista());
@@ -15,6 +16,7 @@ public class escribirInforme {
             writer.write("Lista de Participantes: ");
             writer.newLine();
             for (Object empleado : reunion.obtenerAsistencias()){
+                writer.write(">> ");
                 writer.write(empleado.toString());
                 writer.newLine();
             }
@@ -22,12 +24,12 @@ public class escribirInforme {
             writer.newLine();
             writer.write(reunion.getNotas());
             writer.close();
-
-
         }
         catch (IOException e){
             e.printStackTrace();
         }
     }
-
+    public escribirInforme(String nombreArchivo){
+        this.nombreArchivo = nombreArchivo;
+    }
 }
