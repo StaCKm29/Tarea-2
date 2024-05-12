@@ -23,12 +23,13 @@ public class Main {
         Empleado empleado2 = new Empleado("2", "María", "López", "m");
         listaInvitados.add(empleado2);
         Reunion reunion = new ReunionPresencial(1, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "Sala 1");
+        reunion.empleadoEntrando(empleado1);
         reunion.nuevaNota("Nota 1");
         reunion.nuevaNota("Nota 2");
         reunion.nuevaNota("Nota 3");
         System.out.println(reunion.getNotas());
 
-        escribirInforme informe = new escribirInforme();
+        escribirInforme informe = new escribirInforme("Informe de la reunión");
         informe.generarInforme(reunion);
 
     }
