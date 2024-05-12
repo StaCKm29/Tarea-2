@@ -36,7 +36,7 @@ public class Departamento implements Invitable{
      * Método que invita a los empleados del departamento a un evento.
      */
     @Override
-    public void invitar(Instant hora) {
+    public void invitar(String hora) {
         System.out.println("Invitando a los empleados del departamento " + nombre);
         for (Empleado empleado : empleados) {
             empleado.invitar(hora); 

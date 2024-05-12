@@ -13,7 +13,6 @@ public class Main {
         Date fechaActual = new Date(2024-1900, 4,10);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 10, 13, 0); // Año, mes, día, hora, minuto
-
         // Convertir LocalDateTime a Instant
         Instant horaPrevista = hora.toInstant(ZoneOffset.UTC);
         Duration duracionPrevista = Duration.ofHours(1).plusMinutes(30);
