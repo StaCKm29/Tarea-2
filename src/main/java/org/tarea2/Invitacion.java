@@ -3,7 +3,6 @@ package org.tarea2;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * Clase que representa una invitación a un evento.

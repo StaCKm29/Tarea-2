@@ -7,6 +7,7 @@ import java.time.ZoneOffset;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class Main {
         reunion.nuevaNota("Nota 3");
         System.out.println(reunion.getNotas());
 
-        escribirInforme informe = new escribirInforme("Informe de la reunión");
+        EscribirInforme informe = new EscribirInforme("Informe de la reunión");
         informe.generarInforme(reunion);
 
     }

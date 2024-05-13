@@ -6,5 +6,5 @@ public interface Invitable {
     /**
      * Invita a un empleado a un evento
      */
-    public void invitar(String hora);
+    void invitar(String hora);
 }

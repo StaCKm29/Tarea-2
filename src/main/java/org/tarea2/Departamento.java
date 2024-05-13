@@ -2,7 +2,6 @@ package org.tarea2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.Instant;
 /**Clase que representa un departamento de la empresa.*/
 public class Departamento implements Invitable{
     private String nombre;

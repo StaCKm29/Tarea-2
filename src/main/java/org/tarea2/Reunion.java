@@ -26,7 +26,6 @@ abstract class Reunion {
     private List <Retraso> retrasos;
     private List <String> mensajes;
 
-
     public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
         this.tipoReunion = TipoReunion.values()[tipoReunion];
         this.fecha = fecha;
@@ -106,7 +105,7 @@ abstract class Reunion {
             totalAsistencias.add(asistio);
         } else {
             Instant horaTarde = Instant.now();
-            asistio = new Retraso(em, horaTarde);
+            asistio = new Retraso(em, horaInicio, horaTarde);
             totalAsistencias.add(asistio);
             retrasos.add((Retraso) asistio);
         }

@@ -1,6 +1,6 @@
 package org.tarea2;
 import java.io.*;
-public class escribirInforme {
+public class EscribirInforme {
     private String nombreArchivo;
     public void generarInforme(Reunion reunion){
         try{
@@ -30,7 +30,7 @@ public class escribirInforme {
             e.printStackTrace();
         }
     }
-    public escribirInforme(String nombreArchivo){
+    public EscribirInforme(String nombreArchivo){
         this.nombreArchivo = nombreArchivo;
     }
 }
