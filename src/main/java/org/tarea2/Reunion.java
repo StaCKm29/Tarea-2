@@ -58,10 +58,6 @@ abstract class Reunion {
         }
     }
 
-    /**
-     * Método que obtiene la lista de asistentes a la reunión.
-     * @return Lista de asistentes a la reunión.
-     */
     public List obtenerAsistencias(){
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
@@ -101,6 +97,14 @@ abstract class Reunion {
             empleadosAtrasados.add(retraso.getEmpleado());
         }
         return empleadosAtrasados;
+    }
+
+    /**
+     * Método que obtiene la lista de retrasos
+     * @return Lista de retrasos de la reunion
+     */
+    public List<Retraso> getEmpleadosHoraRetraso(){
+        return retrasos;
     }
 
     /**
@@ -156,7 +160,7 @@ abstract class Reunion {
             totalAsistencias.add(asistio);
         } else {
             Instant horaTarde = Instant.now();
-            asistio = new Retraso(em, horaTarde);
+            asistio = new Retraso(em, horaInicio, horaTarde);
             totalAsistencias.add(asistio);
             retrasos.add((Retraso) asistio);
         }
@@ -168,7 +172,10 @@ abstract class Reunion {
      * Método que añade una nota a la reunión.
      * @param mensaje Mensaje de la nota.
      */
-    public void nuevaNota(String mensaje){
+    public void nuevaNota(String mensaje) throws MensajeNullException{
+        if(mensaje == null){
+            throw new MensajeNullException("El mensaje no puede ser nulo");
+        }
         Nota nota = new Nota(mensaje);
         almacenNotas.add(nota);
     }

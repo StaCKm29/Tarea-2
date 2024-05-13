@@ -2,7 +2,6 @@ package org.tarea2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.Instant;
 /**Clase que representa un departamento de la empresa.*/
 public class Departamento implements Invitable{
     private String nombre;
@@ -36,7 +35,7 @@ public class Departamento implements Invitable{
      * Método que invita a los empleados del departamento a un evento.
      */
     @Override
-    public void invitar(Instant hora) {
+    public void invitar(String hora) {
         System.out.println("Invitando a los empleados del departamento " + nombre);
         for (Empleado empleado : empleados) {
             empleado.invitar(hora); 
