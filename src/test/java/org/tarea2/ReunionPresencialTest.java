@@ -55,10 +55,6 @@ class ReunionPresencialTest {
         reunion.iniciar();
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
-        // Utiliza assertThrows para verificar si se lanza la excepción
-        assertThrows(EmpleadoNullException.class, () -> {
-            reunion.obtenerRetrasos();
-        });
         assertEquals(2, reunion.obtenerRetrasos().size());
     }
 
@@ -92,12 +88,27 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para Notas")
-    void IONota() {
+    void IONota() throws MensajeNullException {
         reunion.nuevaNota("Primera nota");
         reunion.nuevaNota("Segunda nota");
         reunion.nuevaNota("Tercera nota");
 
         System.out.println(reunion.getNotas());
+    }
+
+    //Faltan cosas
+    @Test
+    @DisplayName("Test para Empleado Entrando")
+    void empleadoEntrando() throws EmpleadoNullException {
+        assertNotNull(empleado1);
+        assertNotNull(empleado2);
+        assertNotNull(empleado3);
+    }
+
+    @Test
+    @DisplayName("Test para notas")
+    void notas() throws MensajeNullException {
+
     }
 
 }

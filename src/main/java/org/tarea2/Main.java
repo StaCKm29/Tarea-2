@@ -7,10 +7,9 @@ import java.time.ZoneOffset;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws EmpleadoNullException  {
+    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException {
         Date fechaActual = new Date(2024-1900, 4,10);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 10, 13, 0); // Año, mes, día, hora, minuto
@@ -29,8 +28,16 @@ public class Main {
         reunion.nuevaNota("Nota 2");
         reunion.nuevaNota("Nota 3");
         System.out.println(reunion.getNotas());
-
-        EscribirInforme informe = new EscribirInforme("Informe de la reunión");
+        System.out.println("Cantidad total de asistentes: "+reunion.obtenerTotalAsistencia());
+        reunion.iniciar();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        reunion.empleadoEntrando(empleado2);
+        reunion.finalizar();
+        EscribirInforme informe = new EscribirInforme("InformeReunion");
         informe.generarInforme(reunion);
     }
 }
