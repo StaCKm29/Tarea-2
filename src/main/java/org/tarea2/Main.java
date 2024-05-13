@@ -7,7 +7,6 @@ import java.time.ZoneOffset;
 import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,14 +23,10 @@ public class Main {
         Empleado empleado2 = new Empleado("2", "María", "López", "m");
         listaInvitados.add(empleado2);
         Reunion reunion = new ReunionPresencial(1, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "Sala 1");
-        reunion.empleadoEntrando(empleado1);
         reunion.nuevaNota("Nota 1");
         reunion.nuevaNota("Nota 2");
         reunion.nuevaNota("Nota 3");
         System.out.println(reunion.getNotas());
-
-        EscribirInforme informe = new EscribirInforme("Informe de la reunión");
-        informe.generarInforme(reunion);
 
     }
 }
