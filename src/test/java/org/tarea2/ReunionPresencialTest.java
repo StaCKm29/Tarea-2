@@ -60,7 +60,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener ausencias")
-    void obtenerAusencias() {
+    void obtenerAusencias()     {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
