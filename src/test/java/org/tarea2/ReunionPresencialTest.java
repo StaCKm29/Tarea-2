@@ -104,11 +104,5 @@ class ReunionPresencialTest {
         assertNotNull(empleado2);
         assertNotNull(empleado3);
     }
-
-    @Test
-    @DisplayName("Test para notas")
-    void notas() throws MensajeNullException {
-
-    }
-
+    
 }
