@@ -26,7 +26,7 @@ abstract class Reunion {
     private List <Retraso> retrasos;
     private List <String> mensajes;
 
-    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
+    public Reunion(Integer tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
         this.tipoReunion = TipoReunion.values()[tipoReunion];
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
@@ -98,18 +98,22 @@ abstract class Reunion {
         horaFin = Instant.now();
     }
 
-    public void empleadoEntrando(Empleado em){
-        Asistencia asistio;
-        if(horaInicio == null){
-            asistio = new Asistencia(em);
-            totalAsistencias.add(asistio);
-        } else {
-            Instant horaTarde = Instant.now();
-            asistio = new Retraso(em, horaInicio, horaTarde);
-            totalAsistencias.add(asistio);
-            retrasos.add((Retraso) asistio);
+    public void empleadoEntrando(Empleado em) throws EmpleadoNullException{
+        if(em == null){
+            throw new EmpleadoNullException("El empleado no puede ser nulo");
+        }else {
+            Asistencia asistio;
+            if (horaInicio == null) {
+                asistio = new Asistencia(em);
+                totalAsistencias.add(asistio);
+            } else {
+                Instant horaTarde = Instant.now();
+                asistio = new Retraso(em, horaInicio, horaTarde);
+                totalAsistencias.add(asistio);
+                retrasos.add((Retraso) asistio);
+            }
+            totalAsistentes++;
         }
-        totalAsistentes++;
     }
 
     public void nuevaNota(String mensaje){

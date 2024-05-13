@@ -1,6 +1,6 @@
 Informe de la reunion
 Fecha y hora de la reunión: Fri May 10 00:00:00 CLT 2024 2024-05-10T13:00:00Z
-El tipo de reunión fue: MARKETING
+El tipo de reunión fue: OTRO
 La sala de la reunión es: Sala 1
 Lista de Participantes: 
 >> Empleado: Juan Perez (1)

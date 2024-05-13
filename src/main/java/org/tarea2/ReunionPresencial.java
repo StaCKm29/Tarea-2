@@ -8,7 +8,7 @@ import java.util.List;
 public class ReunionPresencial extends Reunion{
     private String sala;
 
-    public ReunionPresencial(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala){
+    public ReunionPresencial(Integer tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala) {
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitados);
         this.sala = sala;
     }

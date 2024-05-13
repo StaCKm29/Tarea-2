@@ -30,7 +30,7 @@ public class Empleado implements Invitable{
 
     @Override
     public void invitar(String hora) {
-        System.out.println("Invitando a " + nombre + " " + apellidos + " a las " + hora.toString() + " al evento.");
+        System.out.println("Invitando a " + nombre + " " + apellidos + " a las " + hora + " al evento.");
     }
     @Override
     public String toString() {

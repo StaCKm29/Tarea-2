@@ -40,7 +40,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener asistencias")
-    void obtenerAsistencias() {
+    void obtenerAsistencias() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -50,17 +50,21 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener retrasos")
-    void obtenerRetrasos() {
+    void obtenerRetrasos() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado3);
         reunion.iniciar();
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
+        // Utiliza assertThrows para verificar si se lanza la excepción
+        assertThrows(EmpleadoNullException.class, () -> {
+            reunion.obtenerRetrasos();
+        });
         assertEquals(2, reunion.obtenerRetrasos().size());
     }
 
     @Test
     @DisplayName("Test para obtener ausencias")
-    void obtenerAusencias() {
+    void obtenerAusencias() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();

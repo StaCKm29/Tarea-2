@@ -15,7 +15,7 @@ public class ReunionVirtual extends Reunion{
      * @param duracionPrevista
      * @param enlace
      */
-    public ReunionVirtual(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitado, String enlace){
+    public ReunionVirtual(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitado, String enlace) {
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitado);
         this.enlace = enlace;
     }
