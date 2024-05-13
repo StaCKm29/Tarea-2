@@ -104,5 +104,5 @@ class ReunionPresencialTest {
         assertNotNull(empleado2);
         assertNotNull(empleado3);
     }
-    
+
 }
