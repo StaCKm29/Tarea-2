@@ -151,7 +151,7 @@ abstract class Reunion {
             totalAsistencias.add(asistio);
         } else {
             Instant horaTarde = Instant.now();
-            asistio = new Retraso(em, horaTarde);
+            asistio = new Retraso(em, horaInicio, horaTarde);
             totalAsistencias.add(asistio);
             retrasos.add((Retraso) asistio);
         }
@@ -180,4 +180,29 @@ abstract class Reunion {
     }
 
 
+
+    public Date getFecha(){
+        return fecha;
+    }
+    public Instant getHoraPrevista(){
+        return horaPrevista;
+    }
+
+    public Instant getHoraInicio(){
+        return horaInicio;
+    }
+
+    public Instant getHoraFin(){
+        return horaFin;
+    }
+
+    public Duration getDuracionReal(){
+        return duracionReal;
+    }
+
+    public TipoReunion getTipoReunion(){
+        return tipoReunion;
+    }
+
+    public abstract String getSalaEnlace();
 }

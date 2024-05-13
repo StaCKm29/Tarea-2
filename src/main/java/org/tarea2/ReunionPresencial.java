@@ -23,4 +23,8 @@ public class ReunionPresencial extends Reunion{
         this.sala = sala;
     }
 
+    public String getSalaEnlace(){
+        return "La sala de la reunión es: " + sala;
+    }
+
 }

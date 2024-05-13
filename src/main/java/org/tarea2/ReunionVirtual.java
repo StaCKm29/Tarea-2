@@ -19,4 +19,8 @@ public class ReunionVirtual extends Reunion{
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitado);
         this.enlace = enlace;
     }
+
+    public String getSalaEnlace(){
+        return "El enlace de la reunión es: " + enlace;
+    }
 }
