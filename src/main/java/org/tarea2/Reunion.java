@@ -172,7 +172,10 @@ abstract class Reunion {
      * Método que añade una nota a la reunión.
      * @param mensaje Mensaje de la nota.
      */
-    public void nuevaNota(String mensaje){
+    public void nuevaNota(String mensaje) throws MensajeNullException{
+        if(mensaje == null){
+            throw new MensajeNullException("El mensaje no puede ser nulo");
+        }
         Nota nota = new Nota(mensaje);
         almacenNotas.add(nota);
     }
