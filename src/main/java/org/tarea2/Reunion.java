@@ -58,10 +58,6 @@ abstract class Reunion {
         }
     }
 
-    /**
-     * Método que obtiene la lista de asistentes a la reunión.
-     * @return Lista de asistentes a la reunión.
-     */
     public List obtenerAsistencias(){
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
@@ -156,7 +152,7 @@ abstract class Reunion {
             totalAsistencias.add(asistio);
         } else {
             Instant horaTarde = Instant.now();
-            asistio = new Retraso(em, horaTarde);
+            asistio = new Retraso(em, horaInicio, horaTarde);
             totalAsistencias.add(asistio);
             retrasos.add((Retraso) asistio);
         }

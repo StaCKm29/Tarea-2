@@ -1,6 +1,6 @@
 package org.tarea2;
 import java.io.*;
-public class escribirInforme {
+public class EscribirInforme {
     private String nombreArchivo;
     public void generarInforme(Reunion reunion){
         try{
@@ -24,12 +24,13 @@ public class escribirInforme {
             writer.newLine();
             writer.write(reunion.getNotas());
             writer.close();
+            System.out.println("Se ha creado el archivo correctamente.");
         }
         catch (IOException e){
             e.printStackTrace();
         }
     }
-    public escribirInforme(String nombreArchivo){
+    public EscribirInforme(String nombreArchivo){
         this.nombreArchivo = nombreArchivo;
     }
 }
