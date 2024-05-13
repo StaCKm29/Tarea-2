@@ -100,6 +100,14 @@ abstract class Reunion {
     }
 
     /**
+     * Método que obtiene la lista de retrasos
+     * @return Lista de retrasos de la reunion
+     */
+    public List<Retraso> getEmpleadosHoraRetraso(){
+        return retrasos;
+    }
+
+    /**
      * Método que obtiene el total de asistentes a la reunión.
      * @return Total de asistentes a la reunión.
      */
