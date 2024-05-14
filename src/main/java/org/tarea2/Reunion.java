@@ -57,6 +57,7 @@ abstract class Reunion {
     }
 
     public List obtenerAsistencias(){
+        empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
         }
