@@ -57,6 +57,10 @@ abstract class Reunion {
         }
     }
 
+    /**
+     * Método que obtiene la lista de asistentes a la reunión.
+     * @return Lista de asistentes a la reunión.
+     */
     public List obtenerAsistencias(){
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
