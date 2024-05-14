@@ -86,11 +86,23 @@ public class Main {
         System.out.println("Cantidad de empleados que asistieron a la reunión: " + reunion.obtenerTotalAsistencia());
         System.out.println();
 
-        System.out.println("Porcentaje de asistencia a la reunión: " + reunion.obtenerPorcentajeAsistencia());
+        System.out.println("Porcentaje de asistencia a la reunión: " + reunion.obtenerPorcentajeAsistencia()+"%");
         System.out.println();
 
         System.out.println("Notas de la reunión: " + reunion.getNotas());
         System.out.println();
+
+        Empleado em1 = new Empleado("6", "José", "Fuentes", "jfuentes@udec.cl");
+        Empleado em2 = new Empleado("7", "Geoffrey", "Hecht", "ghecht@udec.cl");
+        Empleado em3 = new Empleado("8", "Pierluigi", "Cerulo", "pcerulo@udec.cl");
+        Departamento DIICC = new Departamento("DIICC");
+        DIICC.addEmpleado(em1);
+        DIICC.addEmpleado(em2);
+        DIICC.addEmpleado(em3);
+        DIICC.invitar("14:00");
+
+        //Reunion reunion2 = new ReunionVirtual(3, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "https://meet.google.com/abc-123-def");
+
 
     }
 }
