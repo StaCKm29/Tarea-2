@@ -1,4 +1,5 @@
 package org.tarea2;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,7 +72,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener un int con el total de asistentes")
-    void obtenerTotalAsistencia() {
+    void obtenerTotalAsistencia() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -79,30 +80,38 @@ class ReunionPresencialTest {
     }
 
     @Test
-    void obtenerPorcentajeAsistencia() {
+    void obtenerPorcentajeAsistencia() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado1);
         reunion.iniciar();
         assertEquals(33.33, reunion.obtenerPorcentajeAsistencia(), 0.01);
     }
 
-
     @Test
     @DisplayName("Test para Notas")
-    void IONota() throws MensajeNullException {
-        reunion.nuevaNota("Primera nota");
-        reunion.nuevaNota("Segunda nota");
-        reunion.nuevaNota("Tercera nota");
-
-        System.out.println(reunion.getNotas());
+    void IONota() {
+        assertThrows(MensajeNullException.class, () -> {
+            reunion.nuevaNota(null);
+        });
     }
 
-    //Faltan cosas
     @Test
     @DisplayName("Test para Empleado Entrando")
-    void empleadoEntrando() throws EmpleadoNullException {
+    void empleadoEntrando() {
         assertNotNull(empleado1);
-        assertNotNull(empleado2);
-        assertNotNull(empleado3);
+        assertDoesNotThrow(() -> {
+            reunion.empleadoEntrando(empleado1);
+        });
+        assertThrows(EmpleadoNullException.class, () -> {
+            reunion.empleadoEntrando(null);
+        });
     }
-    
+
+    @AfterEach
+    void tearDown() {
+        reunion = null;
+        listaInvitados = null;
+        empleado1 = null;
+        empleado2 = null;
+        empleado3 = null;
+    }
 }

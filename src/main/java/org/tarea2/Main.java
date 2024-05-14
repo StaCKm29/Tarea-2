@@ -39,5 +39,6 @@ public class Main {
         reunion.finalizar();
         EscribirInforme informe = new EscribirInforme("InformeReunion");
         informe.generarInforme(reunion);
+
     }
 }

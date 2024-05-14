@@ -7,7 +7,7 @@ public class Retraso extends Asistencia{
     private Instant horaLlegada;
     private Instant horaInicio;
 
-    public Retraso(Empleado em, Instant horaInicio, Instant horaLlegada) {
+    public Retraso(Empleado em, Instant horaInicio) {
         super(em);
         this.horaLlegada = Instant.now();
         this.horaInicio = horaInicio;

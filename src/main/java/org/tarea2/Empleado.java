@@ -1,7 +1,5 @@
 package org.tarea2;
 
-import java.time.Instant;
-
 /**
  * Clase que representa a un empleado
  */

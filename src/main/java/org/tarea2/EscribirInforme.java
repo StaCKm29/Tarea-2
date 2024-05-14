@@ -1,8 +1,6 @@
 package org.tarea2;
 import java.io.*;
 import java.time.Duration;
-import java.util.List;
-
 /*
     * Clase que se encarga de escribir un informe de la reunión en un archivo de texto.
  */
