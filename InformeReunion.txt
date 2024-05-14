@@ -1,14 +1,16 @@
 Informe de la reunión
 
-Fecha y hora de la reunión: Fri May 10 00:00:00 CLT 2024 2024-05-10T13:00:00Z
+Fecha y hora de la reunión: Mon Jun 10 10:00:00 CLT 2024 2024-05-14T13:00:00Z
 El tipo de reunión fue: OTRO
 La sala de la reunión es: Sala 1
 
 Lista de Participantes: 
->> Empleado: Juan Perez (1) - j
->> Empleado: María López (2) - m
+>> Empleado: Juan Perez (1) - jperez@udec.cl
+>> Empleado: María López (2) - mlopez@udec.cl
+>> Empleado: Pedro González (3) - pgonzalez@udec.cl
 Lista de empleados que llegaron atrasados: 
->> Empleado: María López (2) - m con un retraso de 00:00:05
+>> Empleado: María López (2) - mlopez@udec.cl con un retraso de 00:00:00
+>> Empleado: Pedro González (3) - pgonzalez@udec.cl con un retraso de 00:00:00
 
 Notas relacionadas a la reunión: 
 [Nota 1, Nota 2, Nota 3]

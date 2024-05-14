@@ -44,7 +44,7 @@ public class EscribirInforme {
             writer.newLine();
             writer.write(reunion.getNotas());
             writer.close();
-            System.out.println("Se ha creado el archivo correctamente.");
+            System.out.println("Se ha creado el informe .txt correctamente.");
         }
         catch (IOException e){
             e.printStackTrace();
