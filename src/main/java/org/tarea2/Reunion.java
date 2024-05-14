@@ -139,15 +139,24 @@ abstract class Reunion {
     /**
      * Método que inicia la reunión.
      */
-    public void iniciar(){
-        horaInicio = Instant.now();
+    public void iniciar() throws IniciarReunionIniciadaException {
+        if(horaInicio != null){
+            throw new IniciarReunionIniciadaException("La reunión ya ha sido iniciada.");
+        }else{
+            horaInicio = Instant.now();
+        }
     }
 
     /**
      * Método que finaliza la reunión.
      */
-    public void finalizar(){
-        horaFin = Instant.now();
+    public void finalizar() throws FinalizarReunionNoIniciadaException {
+        if(horaInicio == null) {
+            throw new FinalizarReunionNoIniciadaException("La reunión no ha sido iniciada.");
+        }
+        else{
+            horaFin = Instant.now();
+        }
     }
 
     /**
