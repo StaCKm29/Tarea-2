@@ -1,8 +1,6 @@
 package org.tarea2;
 import java.io.*;
 import java.time.Duration;
-import java.util.List;
-
 /*
     * Clase que se encarga de escribir un informe de la reunión en un archivo de texto.
  */
@@ -46,7 +44,7 @@ public class EscribirInforme {
             writer.newLine();
             writer.write(reunion.getNotas());
             writer.close();
-            System.out.println("Se ha creado el archivo correctamente.");
+            System.out.println("Se ha creado el informe .txt correctamente.");
         }
         catch (IOException e){
             e.printStackTrace();

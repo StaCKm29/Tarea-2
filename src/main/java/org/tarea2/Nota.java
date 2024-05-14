@@ -14,7 +14,6 @@ public class Nota {
         this.contenido = contenido;
     }
     /**
-     * Método que retorna el contenido de la nota
      * @return Contenido de la nota
      */
     public String getMensaje() {
