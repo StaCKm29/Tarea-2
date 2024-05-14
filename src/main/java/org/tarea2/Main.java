@@ -34,7 +34,11 @@ public class Main {
         //Entrando un empleado a la reunión antes de iniciarse
         reunion.empleadoEntrando(empleado1);
 
-        reunion.iniciar();
+        try {
+            reunion.iniciar();
+        } catch (IniciarReunionIniciadaException e) {
+            throw new RuntimeException(e);
+        }
         //Agregando notas a la reunión
         reunion.nuevaNota("Nota 1");
         reunion.nuevaNota("Nota 2");
@@ -51,7 +55,11 @@ public class Main {
             // Manejar la interrupción
         }
 
-        reunion.finalizar();
+        try {
+            reunion.finalizar();
+        } catch (FinalizarReunionNoIniciadaException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println();
 
 
@@ -121,7 +129,11 @@ public class Main {
         reunion2.empleadoEntrando(em1);
         reunion2.empleadoEntrando(em2);
         reunion2.empleadoEntrando(em3);
-        reunion2.iniciar();
+        try {
+            reunion2.iniciar();
+        } catch (IniciarReunionIniciadaException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Duracion de reunion 2: " + reunion2.calcularTiempoReal());
         /*
         System.out.println("Cantidad de empleados en reunion 2: " + reunion.obtenerTotalAsistencia());
