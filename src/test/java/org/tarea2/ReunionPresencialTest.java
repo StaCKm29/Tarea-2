@@ -106,6 +106,14 @@ class ReunionPresencialTest {
         });
     }
 
+    @Test
+    @DisplayName("Test para duración de una reunión")
+    void duracionReunion(){
+        assertTrows(DuracionNullException.class, () ->{
+           reunion.calcularTiempoReal();
+        });
+    }
+
     @AfterEach
     void tearDown() {
         reunion = null;

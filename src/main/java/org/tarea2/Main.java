@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException {
+    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException {
         Date fechaActual = new Date(2024-1900, 5, 10, 10, 0);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 14, 13, 0); // Año, mes, día, hora, minuto
@@ -54,8 +54,14 @@ public class Main {
         reunion.finalizar();
         System.out.println();
 
+
+        //Reunión ya finalizada e imprimimos por terminal todos los métodos que tenga la reunión.
+
         EscribirInforme informe = new EscribirInforme("InformeReunion");
         informe.generarInforme(reunion);
+        System.out.println();
+
+        System.out.println("Organizador de la reunión: " + reunion.getOrganizador());
         System.out.println();
 
         //Pasar de tiempo en formato Duration a formato LocalTime
@@ -91,18 +97,37 @@ public class Main {
 
         System.out.println("Notas de la reunión: " + reunion.getNotas());
         System.out.println();
+        System.out.println();
 
+
+
+        //OTRA REUNIÓN DISTINTA CON UNA INVITACION A UN DEPARTAMENTO
+        System.out.println("REUNION 2");
+        System.out.println();
         Empleado em1 = new Empleado("6", "José", "Fuentes", "jfuentes@udec.cl");
         Empleado em2 = new Empleado("7", "Geoffrey", "Hecht", "ghecht@udec.cl");
         Empleado em3 = new Empleado("8", "Pierluigi", "Cerulo", "pcerulo@udec.cl");
+
+        //Creación de un departamento
         Departamento DIICC = new Departamento("DIICC");
+        //Agrgando empleados al departamento
         DIICC.addEmpleado(em1);
         DIICC.addEmpleado(em2);
         DIICC.addEmpleado(em3);
-        DIICC.invitar("14:00");
 
-        //Reunion reunion2 = new ReunionVirtual(3, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "https://meet.google.com/abc-123-def");
+        //Invitamos a todo el departamento a la reunion 2
+        Reunion reunion2 = new ReunionVirtual(0, fechaActual, horaPrevista, duracionPrevista, DIICC.getEmpleados(), "https://meet.google.com/abc-123-def");
 
-
+        reunion2.empleadoEntrando(em1);
+        reunion2.empleadoEntrando(em2);
+        reunion2.empleadoEntrando(em3);
+        reunion2.iniciar();
+        System.out.println("Duracion de reunion 2: " + reunion2.calcularTiempoReal());
+        /*
+        System.out.println("Cantidad de empleados en reunion 2: " + reunion.obtenerTotalAsistencia());
+        System.out.println("Empleados que llegaron a tiempo a la reunion 2: ");
+        for(Object em : reunion2.obtenerAsistencias())
+            System.out.println(em);
+        */
     }
 }

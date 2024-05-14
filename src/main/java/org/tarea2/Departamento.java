@@ -41,4 +41,8 @@ public class Departamento implements Invitable{
             empleado.invitar(hora); 
         }
     }
+
+    public List<Empleado> getEmpleados(){
+        return empleados;
+    }
 }

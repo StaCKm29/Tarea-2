@@ -14,12 +14,11 @@ abstract class Reunion {
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio = null;
-    private Instant horaFin;
+    private Instant horaFin = null;
     private Duration duracionReal;
     private TipoReunion tipoReunion;
     private Empleado organizador;
     private float porcentajeAsistencia;
-    private int Total = 0;
     private List <Empleado> listaInvitados;
     private List <Empleado> empleadosAsistentes;
     private List <Empleado> empleadosAtrasados;
@@ -45,9 +44,6 @@ abstract class Reunion {
         this.listaInvitados = listaInvitados;
         this.organizador = listaInvitados.getFirst();
         this.almacenNotas = new ArrayList<>();
-        this.empleadosAsistentes = new ArrayList<>();
-        this.empleadosAtrasados = new ArrayList<>();
-        this.empleadosAusentes = new ArrayList<>();
         this.retrasos = new ArrayList<>();
         this.totalAsistencias = new ArrayList<>();
         Invitacion invitacion = new Invitacion();
@@ -56,7 +52,7 @@ abstract class Reunion {
         }
     }
 
-    public List obtenerAsistencias(){
+    public List<Empleado> obtenerAsistencias(){
         empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
@@ -68,7 +64,8 @@ abstract class Reunion {
      * Método que obtiene la lista de ausentes a la reunión.
      * @return Lista de ausentes a la reunión.
      */
-    public List obtenerAusencias() {
+    public List<Empleado> obtenerAusencias() {
+        empleadosAusentes = new ArrayList<>();
         for (Empleado empleado : listaInvitados) {
             boolean asistio = false;
             for (Asistencia asistencia : totalAsistencias) {
@@ -91,7 +88,8 @@ abstract class Reunion {
      * Método que obtiene la lista de empleados que llegaron tarde a la reunión.
      * @return Lista de empleados que llegaron tarde a la reunión.
      */
-    public List obtenerRetrasos(){
+    public List<Empleado> obtenerRetrasos(){
+        empleadosAtrasados = new ArrayList<>();
         for(Retraso retraso : retrasos){
             empleadosAtrasados.add(retraso.getEmpleado());
         }
@@ -111,7 +109,7 @@ abstract class Reunion {
      * @return Total de asistentes a la reunión.
      */
     public int obtenerTotalAsistencia(){
-        return Total;
+        return empleadosAsistentes.size();
     }
 
     /**
@@ -119,7 +117,7 @@ abstract class Reunion {
      * @return Porcentaje de asistencia a la reunión.
      */
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = ((float)Total/listaInvitados.size())*100;
+        porcentajeAsistencia = ((float)empleadosAsistentes.size()/listaInvitados.size())*100;
         String porcentajeString = String.valueOf(porcentajeAsistencia).replace(',', '.');
         porcentajeAsistencia = Float.parseFloat(porcentajeString);
         return porcentajeAsistencia;
@@ -129,9 +127,13 @@ abstract class Reunion {
      * Método que calcula la duración real de la reunión.
      * @return Duración real de la reunión.
      */
-    public Duration calcularTiempoReal(){
-        duracionReal = Duration.between(horaInicio, horaFin);
-        return duracionReal;
+    public Duration calcularTiempoReal() throws DuracionNullException {
+        if(horaInicio == null || horaFin == null){
+            throw new DuracionNullException("La reunión debe iniciar y finalizar primero. ");
+        }else {
+            duracionReal = Duration.between(horaInicio, horaFin);
+            return duracionReal;
+        }
     }
 
     /**
@@ -165,7 +167,6 @@ abstract class Reunion {
                 totalAsistencias.add(asistio);
                 retrasos.add((Retraso) asistio);
             }
-            Total++;
         }
     }
 
@@ -174,12 +175,13 @@ abstract class Reunion {
      * Método que añade una nota a la reunión.
      * @param mensaje Mensaje de la nota.
      */
-    public void nuevaNota(String mensaje) throws MensajeNullException{
+    public void nuevaNota(String mensaje) throws MensajeNullException {
         if(mensaje == null){
             throw new MensajeNullException("El mensaje no puede ser nulo");
+        }else {
+            Nota nota = new Nota(mensaje);
+            almacenNotas.add(nota);
         }
-        Nota nota = new Nota(mensaje);
-        almacenNotas.add(nota);
     }
 
     /**
@@ -227,14 +229,6 @@ abstract class Reunion {
     }
 
     /**
-     * Método que obtiene la duración real de la reunión.
-     * @return La duración real de la reunión.
-     */
-    public Duration getDuracionReal(){
-        return duracionReal;
-    }
-
-    /**
      * Método que obtiene el tipo de reunión.
      * @return Tipo de reunión.
      */
@@ -247,4 +241,7 @@ abstract class Reunion {
      * @return Sala/enlace de la reunión.
      */
     public abstract String getSalaEnlace();
+    public Empleado getOrganizador(){
+        return organizador;
+    }
 }
