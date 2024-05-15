@@ -61,6 +61,7 @@ abstract class Reunion {
     }
 
     public List<Empleado> obtenerAsistencias(){
+        empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
         }
@@ -114,7 +115,7 @@ abstract class Reunion {
      * @return Total de asistentes a la reunión.
      */
     public int obtenerTotalAsistencia(){
-        return empleadosAsistentes.size();
+        return totalAsistencias.size();
     }
 
     /**
@@ -122,7 +123,7 @@ abstract class Reunion {
      * @return Porcentaje de asistencia a la reunión.
      */
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = ((float)empleadosAsistentes.size()/listaInvitados.size())*100;
+        porcentajeAsistencia = ((float)totalAsistencias.size()/listaInvitados.size())*100;
         String porcentajeString = String.valueOf(porcentajeAsistencia).replace(',', '.');
         porcentajeAsistencia = Float.parseFloat(porcentajeString);
         return porcentajeAsistencia;
