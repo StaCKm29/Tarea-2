@@ -60,7 +60,8 @@ abstract class Reunion {
         }
     }
 
-    public List obtenerAsistencias(){
+    public List<Empleado> obtenerAsistencias(){
+        empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
         }
@@ -71,7 +72,7 @@ abstract class Reunion {
      * Método que obtiene la lista de ausentes a la reunión.
      * @return Lista de ausentes a la reunión.
      */
-    public List obtenerAusencias() {
+    public List<Empleado> obtenerAusencias() {
         for (Empleado empleado : listaInvitados) {
             boolean asistio = false;
             for (Asistencia asistencia : totalAsistencias) {
@@ -94,7 +95,7 @@ abstract class Reunion {
      * Método que obtiene la lista de empleados que llegaron tarde a la reunión.
      * @return Lista de empleados que llegaron tarde a la reunión.
      */
-    public List obtenerRetrasos(){
+    public List<Empleado> obtenerRetrasos(){
         for(Retraso retraso : retrasos){
             empleadosAtrasados.add(retraso.getEmpleado());
         }
@@ -114,7 +115,7 @@ abstract class Reunion {
      * @return Total de asistentes a la reunión.
      */
     public int obtenerTotalAsistencia(){
-        return empleadosAsistentes.size();
+        return totalAsistencias.size();
     }
 
     /**
@@ -122,7 +123,7 @@ abstract class Reunion {
      * @return Porcentaje de asistencia a la reunión.
      */
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = ((float)empleadosAsistentes.size()/listaInvitados.size())*100;
+        porcentajeAsistencia = ((float)totalAsistencias.size()/listaInvitados.size())*100;
         String porcentajeString = String.valueOf(porcentajeAsistencia).replace(',', '.');
         porcentajeAsistencia = Float.parseFloat(porcentajeString);
         return porcentajeAsistencia;
