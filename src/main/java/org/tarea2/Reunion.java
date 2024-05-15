@@ -36,8 +36,9 @@ abstract class Reunion {
      * @param duracionPrevista Duración prevista de la reunión.
      * @param listaInvitados Lista de invitados a la reunión.
      * @throws OverflowEnumException Excepción que se lanza si el tipo de reunión no es válido.
+     * @throws EmpleadoNullException Excepción que se lanza si se invita un empleado nulo.
      */
-    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados) throws OverflowEnumException{
+    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados) throws OverflowEnumException, EmpleadoNullException {
         if(tipoReunion < 0 || tipoReunion >= TipoReunion.values().length){
             throw new OverflowEnumException("El tipo de reunión no es válido.");
         }else{
@@ -184,13 +185,12 @@ abstract class Reunion {
     /**
      * Método que añade un empleado a la reunión.
      * @param em Empleado a añadir a la reunión.
-     * @throws EmpleadoNullException Excepción que se lanza si el empleado es nulo.
+     * @throws EmpleadoNoInvitadoException Excepción que se lanza si el empleado no ha sido invitado a la reunión.
+     * @throws ReunionYaFinalizoException Excepción que se lanza si la reunión ya ha finalizado.
      */
-    public void empleadoEntrando(Empleado em) throws EmpleadoNullException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    public void empleadoEntrando(Empleado em) throws EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         if(!listaInvitados.contains(em)){
             throw new EmpleadoNoInvitadoException("El empleado no ha sido invitado a la reunión.");
-        }else if (em == null) {
-            throw new EmpleadoNullException("El empleado no puede ser nulo");
         } else if (horaFin != null) {
             throw new ReunionYaFinalizoException("La reunión ya finalizó.");
         } else {

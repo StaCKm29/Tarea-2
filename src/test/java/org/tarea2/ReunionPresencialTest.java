@@ -19,7 +19,7 @@ class ReunionPresencialTest {
     private Empleado empleado3;
 
     @BeforeEach
-    void setUp() throws OverflowEnumException {
+    void setUp() throws OverflowEnumException, EmpleadoNullException {
         Date fechaActual = new Date(2024-1900, 4,10);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 10, 13, 0); // Año, mes, día, hora, minuto
@@ -49,21 +49,17 @@ class ReunionPresencialTest {
     }
     @Test
     @DisplayName("Test para obtener asistencias")
-    void obtenerAsistencias() throws EmpleadoNullException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    void obtenerAsistencias() throws EmpleadoNoInvitadoException, ReunionYaFinalizoException, IniciarReunionIniciadaException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
-        try {
-            reunion.iniciar();
-        } catch (IniciarReunionIniciadaException e) {
-            throw new RuntimeException(e);
-        }
+        reunion.iniciar();
         reunion.empleadoEntrando(empleado3);
         assertEquals(3, reunion.obtenerAsistencias().size());
     }
 
     @Test
     @DisplayName("Test para obtener retrasos")
-    void obtenerRetrasos() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    void obtenerRetrasos() throws IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado3);
         reunion.iniciar();
         reunion.empleadoEntrando(empleado1);
@@ -73,7 +69,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener ausencias")
-    void obtenerAusencias() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    void obtenerAusencias() throws IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -84,7 +80,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener un int con el total de asistentes")
-    void obtenerTotalAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    void obtenerTotalAsistencia() throws IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -92,7 +88,7 @@ class ReunionPresencialTest {
     }
 
     @Test
-    void obtenerPorcentajeAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+    void obtenerPorcentajeAsistencia() throws IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.iniciar();
         assertEquals(33.33, reunion.obtenerPorcentajeAsistencia(), 0.01);
@@ -103,18 +99,6 @@ class ReunionPresencialTest {
     void IONota() {
         assertThrows(MensajeNullException.class, () -> {
             reunion.nuevaNota(null);
-        });
-    }
-
-    @Test
-    @DisplayName("Test para Empleado null entrando a la reunión")
-    void empleadoEntrando() {
-        assertNotNull(empleado1);
-        assertDoesNotThrow(() -> {
-            reunion.empleadoEntrando(empleado1);
-        });
-        assertThrows(EmpleadoNullException.class, () -> {
-            reunion.empleadoEntrando(null);
         });
     }
 
@@ -157,15 +141,11 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para finalizar una reunión")
-    void finalizarReunion(){
+    void finalizarReunion() throws IniciarReunionIniciadaException {
         assertThrows(FinalizarReunionNoIniciadaException.class, () -> {
             reunion.finalizar();
         });
-        try {
-            reunion.iniciar();
-        } catch (IniciarReunionIniciadaException e) {
-            throw new RuntimeException(e);
-        }
+        reunion.iniciar();
         assertDoesNotThrow(() -> {
             reunion.finalizar();
         });

@@ -20,8 +20,9 @@ public class ReunionVirtual extends Reunion{
      * @param listaInvitado lista de empleados invitados a la reunión.
      * @param enlace enlace de la reunión.
      * @throws OverflowEnumException excepción de tipo de reunión no válido.
+     * @throws EmpleadoNullException excepción que se lanza si se invita un Empleado null.
      */
-    public ReunionVirtual(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitado, String enlace) throws OverflowEnumException {
+    public ReunionVirtual(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitado, String enlace) throws EmpleadoNullException, OverflowEnumException{
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitado);
         this.enlace = enlace;
     }

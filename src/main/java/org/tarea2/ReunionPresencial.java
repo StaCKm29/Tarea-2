@@ -17,8 +17,10 @@ public class ReunionPresencial extends Reunion{
      * @param duracionPrevista Duración prevista de la reunión.
      * @param listaInvitados Lista de invitados a la reunión.
      * @param sala Sala de la reunión.
+     * @throws OverflowEnumException Excepción que se lanza si el tipo de reunión no es válido.
+     * @throws EmpleadoNullException Excepción que se lanza si se invita un empleado nulo.
      */
-    public ReunionPresencial(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala) throws OverflowEnumException{
+    public ReunionPresencial(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala) throws OverflowEnumException, EmpleadoNullException {
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitados);
         this.sala = sala;
     }

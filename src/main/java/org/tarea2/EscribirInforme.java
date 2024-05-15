@@ -16,7 +16,11 @@ public class EscribirInforme {
             BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo + ".txt"));
             writer.write("Informe de la reunión\n");
             writer.newLine();
-            writer.write("Fecha y hora de la reunión: " + reunion.getFecha() + " " + reunion.getHoraPrevista());
+            writer.write("Fecha y hora de la reunión: "  + reunion.getHoraPrevista());
+            writer.newLine();
+            writer.write("Inicio de la reunión: "+reunion.getHoraInicio() + " Fin de la reunión: " + reunion.getHoraFin());
+            writer.newLine();
+            writer.write("Duración de la reunión: " + reunion.calcularTiempoReal());
             writer.newLine();
             writer.write("El tipo de reunión fue: " + reunion.getTipoReunion());
             writer.newLine();
@@ -48,6 +52,8 @@ public class EscribirInforme {
         }
         catch (IOException e){
             e.printStackTrace();
+        } catch (DuracionNullException e) {
+            throw new RuntimeException(e);
         }
     }
     /**
