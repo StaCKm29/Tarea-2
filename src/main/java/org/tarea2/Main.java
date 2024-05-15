@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException, OverflowEnumException {
+    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException, OverflowEnumException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         Date fechaActual = new Date(2024-1900, 5, 10, 10, 0);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 14, 13, 0); // Año, mes, día, hora, minuto
@@ -28,13 +28,47 @@ public class Main {
         listaInvitados.add(empleado4);
         Empleado empleado5 = new Empleado("5", "Luis", "Rodríguez", "lrodriguez@udec.cl");
         listaInvitados.add(empleado5);
+        Empleado empleadonulo = null;
+        listaInvitados.add(empleadonulo);
+        Empleado noInvitado = new Empleado("6", "José", "Fuentes", "jfuentes@udec.cl");
+        Empleado superAtrasado = new Empleado("7", "Gabriel", "Castillo", "gcastillo@udec.cl");
 
         Reunion reunion = new ReunionPresencial(2, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "Sala 1");
 
+        try{
+            reunion.finalizar();
+        }
+        catch (FinalizarReunionNoIniciadaException e){
+            System.out.println("No se puede finalizar una reunión que no ha sido iniciada");
+        }
         //Entrando un empleado a la reunión antes de iniciarse
         reunion.empleadoEntrando(empleado1);
 
         reunion.iniciar();
+        try{
+            reunion.calcularTiempoReal();
+        }
+        catch (DuracionNullException e){
+            System.out.println("Error, la reunion no ha sido finalizada");
+        }
+
+        try{
+            reunion.iniciar();
+        }
+        catch (IniciarReunionIniciadaException e){
+            System.out.println("No se puede iniciar una reunión ya iniciada");
+        }
+        try{
+            reunion.empleadoEntrando(empleadonulo);
+            reunion.empleadoEntrando(noInvitado);
+        }
+        catch (EmpleadoNullException e){
+            System.out.println("Error, el empleado es nulo");
+        }
+        catch(EmpleadoNoInvitadoException e){
+            System.out.println("Error, el empleado no ha sido invitado a esta reunión");
+        }
+
         //Agregando notas a la reunión
         reunion.nuevaNota("Nota 1");
         reunion.nuevaNota("Nota 2");
@@ -52,7 +86,19 @@ public class Main {
         }
 
         reunion.finalizar();
+        try{
+            reunion.empleadoEntrando(superAtrasado);
+        }catch (EmpleadoNullException e){
+            System.out.println("Error, el empleado es nulo");
+        }
+        catch(EmpleadoNoInvitadoException e){
+            System.out.println("Error, el empleado no ha sido invitado a esta reunión");
+        }
+        catch (ReunionYaFinalizoException e){
+            System.out.println("Error, la reunión ya finalizó");
+        }
         System.out.println();
+
 
 
         //Reunión ya finalizada e imprimimos por terminal todos los métodos que tenga la reunión.
@@ -108,12 +154,14 @@ public class Main {
         Empleado em2 = new Empleado("7", "Geoffrey", "Hecht", "ghecht@udec.cl");
         Empleado em3 = new Empleado("8", "Pierluigi", "Cerulo", "pcerulo@udec.cl");
 
+
         //Creación de un departamento
         Departamento DIICC = new Departamento("DIICC");
         //Agrgando empleados al departamento
         DIICC.addEmpleado(em1);
         DIICC.addEmpleado(em2);
         DIICC.addEmpleado(em3);
+
 
         //Invitamos a todo el departamento a la reunion 2
         Reunion reunion2 = new ReunionVirtual(0, fechaActual, horaPrevista, duracionPrevista, DIICC.getEmpleados(), "https://meet.google.com/abc-123-def");
@@ -122,13 +170,30 @@ public class Main {
         reunion2.empleadoEntrando(em2);
         reunion2.empleadoEntrando(em3);
 
+        reunion2.nuevaNota("Nota 1");
+        try{
+            reunion2.nuevaNota(null);
+        }
+        catch (MensajeNullException e){
+            System.out.println("Mensaje nulo");
+        }
+
+
         reunion2.iniciar();
         reunion2.finalizar();
+
 
         //Imprimir algunos métodos de la reunion 2
         System.out.println("Cantidad de empleados en reunion 2: " + reunion.obtenerTotalAsistencia());
         System.out.println("Empleados que llegaron a tiempo a la reunion 2: ");
         for(Object em : reunion2.obtenerAsistencias())
             System.out.println(em);
+
+        System.out.println("TERCERA REUNIÓN");
+        try {
+            Reunion reunion3 = new ReunionPresencial(4, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "Sala 2");
+        }catch (OverflowEnumException e){
+            System.out.println("Error, el tipo de reunión debe estar entre 0 y 2.");
+        }
     }
 }

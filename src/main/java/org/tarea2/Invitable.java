@@ -1,10 +1,10 @@
 package org.tarea2;
 /**
- * Interfaz para invitar a un empleado a un evento
+ * Interfaz que invita a cualquier clase que implemente la interfaz (Empleado y Departamento) a una reunión.
  */
 public interface Invitable {
     /**
-     * Invita a un empleado a un evento
+     * Enviar la invitacion con una hora predeterminada.
      */
     void invitar(String hora);
 }

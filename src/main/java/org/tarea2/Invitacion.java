@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Clase que representa una invitación a un evento.
  */
 public class Invitacion {
-    private Instant hora;
+    private Instant hora; //Hora a la que envía la invitación.
     private String tiempoFormateado;
 
     public Invitacion() {
@@ -18,7 +18,7 @@ public class Invitacion {
     }
     /**
      * Metodo que envia una invitación a un invitado.
-     * @param invitado Invitable a invitar.
+     * @param invitado Cualuier clase que implemente la interfaz Invitable.
      */
     public void enviarInvitacion(Invitable invitado) {
         invitado.invitar(tiempoFormateado);

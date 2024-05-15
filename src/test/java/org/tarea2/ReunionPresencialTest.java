@@ -49,7 +49,7 @@ class ReunionPresencialTest {
     }
     @Test
     @DisplayName("Test para obtener asistencias")
-    void obtenerAsistencias() throws EmpleadoNullException{
+    void obtenerAsistencias() throws EmpleadoNullException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         try {
@@ -63,7 +63,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener retrasos")
-    void obtenerRetrasos() throws EmpleadoNullException, IniciarReunionIniciadaException {
+    void obtenerRetrasos() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado3);
         reunion.iniciar();
         reunion.empleadoEntrando(empleado1);
@@ -73,7 +73,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener ausencias")
-    void obtenerAusencias() throws EmpleadoNullException, IniciarReunionIniciadaException {
+    void obtenerAusencias() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -84,7 +84,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener un int con el total de asistentes")
-    void obtenerTotalAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException {
+    void obtenerTotalAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -92,7 +92,7 @@ class ReunionPresencialTest {
     }
 
     @Test
-    void obtenerPorcentajeAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException {
+    void obtenerPorcentajeAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         reunion.empleadoEntrando(empleado1);
         reunion.iniciar();
         assertEquals(33.33, reunion.obtenerPorcentajeAsistencia(), 0.01);
@@ -107,7 +107,7 @@ class ReunionPresencialTest {
     }
 
     @Test
-    @DisplayName("Test para Empleado Entrando")
+    @DisplayName("Test para Empleado null entrando a la reunión")
     void empleadoEntrando() {
         assertNotNull(empleado1);
         assertDoesNotThrow(() -> {
@@ -115,6 +115,24 @@ class ReunionPresencialTest {
         });
         assertThrows(EmpleadoNullException.class, () -> {
             reunion.empleadoEntrando(null);
+        });
+    }
+
+    @Test
+    @DisplayName("Test para empleado no invitado entrando a la reunión")
+    void empleadoNoInvitado() {
+        assertThrows(EmpleadoNoInvitadoException.class, () -> {
+            reunion.empleadoEntrando(new Empleado("4", "Gabriel", "Castillo", "gcastillo@udec.cl"));
+        });
+    }
+
+    @Test
+    @DisplayName("Test para empleado entrando a una reunión ya finalizada")
+    void empleadoEntrandoReunionFinalizada() throws IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException {
+        reunion.iniciar();
+        reunion.finalizar();
+        assertThrows(ReunionYaFinalizoException.class, () -> {
+            reunion.empleadoEntrando(empleado1);
         });
     }
 

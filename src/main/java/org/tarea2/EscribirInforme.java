@@ -51,7 +51,7 @@ public class EscribirInforme {
         }
     }
     /**
-     * Constructor de la clase EscribirInforme
+     * Constructor de la clase EscribirInforme.
      * @param nombreArchivo Nombre del archivo en el que se guardará el informe.
      */
     public EscribirInforme(String nombreArchivo){
