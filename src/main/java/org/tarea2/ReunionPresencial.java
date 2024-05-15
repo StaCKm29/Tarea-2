@@ -18,7 +18,7 @@ public class ReunionPresencial extends Reunion{
      * @param listaInvitados Lista de invitados a la reunión
      * @param sala Sala de la reunión
      */
-    public ReunionPresencial(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala){
+    public ReunionPresencial(int tipo, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados, String sala) throws OverflowEnumException{
         super(tipo, fecha, horaPrevista, duracionPrevista, listaInvitados);
         this.sala = sala;
     }

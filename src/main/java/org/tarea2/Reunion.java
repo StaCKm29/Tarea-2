@@ -36,8 +36,12 @@ abstract class Reunion {
      * @param duracionPrevista Duración prevista de la reunión
      * @param listaInvitados Lista de empleados invitados a la reunión
      */
-    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
-        this.tipoReunion = TipoReunion.values()[tipoReunion];
+    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados) throws OverflowEnumException{
+        if(tipoReunion < 0 || tipoReunion >= TipoReunion.values().length){
+            throw new OverflowEnumException("El tipo de reunión no es válido.");
+        }else{
+            this.tipoReunion = TipoReunion.values()[tipoReunion];
+        }
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException {
+    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException, OverflowEnumException {
         Date fechaActual = new Date(2024-1900, 5, 10, 10, 0);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 14, 13, 0); // Año, mes, día, hora, minuto
@@ -121,17 +121,14 @@ public class Main {
         reunion2.empleadoEntrando(em1);
         reunion2.empleadoEntrando(em2);
         reunion2.empleadoEntrando(em3);
-        try {
-            reunion2.iniciar();
-        } catch (IniciarReunionIniciadaException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Duracion de reunion 2: " + reunion2.calcularTiempoReal());
-        /*
+
+        reunion2.iniciar();
+        reunion2.finalizar();
+
+        //Imprimir algunos métodos de la reunion 2
         System.out.println("Cantidad de empleados en reunion 2: " + reunion.obtenerTotalAsistencia());
         System.out.println("Empleados que llegaron a tiempo a la reunion 2: ");
         for(Object em : reunion2.obtenerAsistencias())
             System.out.println(em);
-        */
     }
 }

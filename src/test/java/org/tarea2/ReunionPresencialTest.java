@@ -19,7 +19,7 @@ class ReunionPresencialTest {
     private Empleado empleado3;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws OverflowEnumException {
         Date fechaActual = new Date(2024-1900, 4,10);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 10, 13, 0); // Año, mes, día, hora, minuto
@@ -39,6 +39,14 @@ class ReunionPresencialTest {
         reunion = new ReunionPresencial(1, fechaActual, horaPrevista, duracionPrevista, listaInvitados, "Sala 1");
     }
 
+    @Test
+    @DisplayName("Test para evaluar tipo correcto de reunión")
+    void tipoReunion() {
+        assertEquals(TipoReunion.values()[1], reunion.getTipoReunion());
+        assertThrows(OverflowEnumException.class, () -> {
+            new ReunionPresencial(10, new Date(), Instant.now(), Duration.ofHours(1), new ArrayList<>(), "Sala 1");
+        });
+    }
     @Test
     @DisplayName("Test para obtener asistencias")
     void obtenerAsistencias() throws EmpleadoNullException{
@@ -144,7 +152,6 @@ class ReunionPresencialTest {
             reunion.finalizar();
         });
     }
-
 
     @AfterEach
     void tearDown() {
