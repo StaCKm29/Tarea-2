@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException {
+    public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException {
         Date fechaActual = new Date(2024-1900, 5, 10, 10, 0);
         // Crear un LocalDateTime con la hora 13:00
         LocalDateTime hora = LocalDateTime.of(2024, 5, 14, 13, 0); // Año, mes, día, hora, minuto
@@ -34,11 +34,7 @@ public class Main {
         //Entrando un empleado a la reunión antes de iniciarse
         reunion.empleadoEntrando(empleado1);
 
-        try {
-            reunion.iniciar();
-        } catch (IniciarReunionIniciadaException e) {
-            throw new RuntimeException(e);
-        }
+        reunion.iniciar();
         //Agregando notas a la reunión
         reunion.nuevaNota("Nota 1");
         reunion.nuevaNota("Nota 2");
@@ -55,11 +51,7 @@ public class Main {
             // Manejar la interrupción
         }
 
-        try {
-            reunion.finalizar();
-        } catch (FinalizarReunionNoIniciadaException e) {
-            throw new RuntimeException(e);
-        }
+        reunion.finalizar();
         System.out.println();
 
 

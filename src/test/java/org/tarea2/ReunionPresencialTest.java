@@ -44,14 +44,18 @@ class ReunionPresencialTest {
     void obtenerAsistencias() throws EmpleadoNullException{
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
-        reunion.iniciar();
+        try {
+            reunion.iniciar();
+        } catch (IniciarReunionIniciadaException e) {
+            throw new RuntimeException(e);
+        }
         reunion.empleadoEntrando(empleado3);
         assertEquals(3, reunion.obtenerAsistencias().size());
     }
 
     @Test
     @DisplayName("Test para obtener retrasos")
-    void obtenerRetrasos() throws EmpleadoNullException{
+    void obtenerRetrasos() throws EmpleadoNullException, IniciarReunionIniciadaException {
         reunion.empleadoEntrando(empleado3);
         reunion.iniciar();
         reunion.empleadoEntrando(empleado1);
@@ -61,7 +65,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener ausencias")
-    void obtenerAusencias() throws EmpleadoNullException{
+    void obtenerAusencias() throws EmpleadoNullException, IniciarReunionIniciadaException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -72,7 +76,7 @@ class ReunionPresencialTest {
 
     @Test
     @DisplayName("Test para obtener un int con el total de asistentes")
-    void obtenerTotalAsistencia() throws EmpleadoNullException{
+    void obtenerTotalAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException {
         reunion.empleadoEntrando(empleado1);
         reunion.empleadoEntrando(empleado2);
         reunion.iniciar();
@@ -80,7 +84,7 @@ class ReunionPresencialTest {
     }
 
     @Test
-    void obtenerPorcentajeAsistencia() throws EmpleadoNullException{
+    void obtenerPorcentajeAsistencia() throws EmpleadoNullException, IniciarReunionIniciadaException {
         reunion.empleadoEntrando(empleado1);
         reunion.iniciar();
         assertEquals(33.33, reunion.obtenerPorcentajeAsistencia(), 0.01);
@@ -109,7 +113,7 @@ class ReunionPresencialTest {
     @Test
     @DisplayName("Test para duración de una reunión")
     void duracionReunion(){
-        assertTrows(DuracionNullException.class, () ->{
+        assertThrows(DuracionNullException.class, () ->{
            reunion.calcularTiempoReal();
         });
     }
