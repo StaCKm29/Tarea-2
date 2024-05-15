@@ -60,7 +60,7 @@ abstract class Reunion {
         }
     }
 
-    public List<Empleado> obtenerAsistencias(){
+    public List obtenerAsistencias(){
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
         }
@@ -71,7 +71,7 @@ abstract class Reunion {
      * Método que obtiene la lista de ausentes a la reunión.
      * @return Lista de ausentes a la reunión.
      */
-    public List<Empleado> obtenerAusencias() {
+    public List obtenerAusencias() {
         for (Empleado empleado : listaInvitados) {
             boolean asistio = false;
             for (Asistencia asistencia : totalAsistencias) {
@@ -94,7 +94,7 @@ abstract class Reunion {
      * Método que obtiene la lista de empleados que llegaron tarde a la reunión.
      * @return Lista de empleados que llegaron tarde a la reunión.
      */
-    public List<Empleado> obtenerRetrasos(){
+    public List obtenerRetrasos(){
         for(Retraso retraso : retrasos){
             empleadosAtrasados.add(retraso.getEmpleado());
         }
