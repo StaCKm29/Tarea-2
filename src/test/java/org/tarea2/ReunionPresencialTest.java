@@ -118,6 +118,34 @@ class ReunionPresencialTest {
         });
     }
 
+    @Test
+    @DisplayName("Test para iniciar una reunión")
+    void iniciarReunion(){
+        assertDoesNotThrow(() -> {
+            reunion.iniciar();
+        });
+        assertThrows(IniciarReunionIniciadaException.class, () -> {
+            reunion.iniciar();
+        });
+    }
+
+    @Test
+    @DisplayName("Test para finalizar una reunión")
+    void finalizarReunion(){
+        assertThrows(FinalizarReunionNoIniciadaException.class, () -> {
+            reunion.finalizar();
+        });
+        try {
+            reunion.iniciar();
+        } catch (IniciarReunionIniciadaException e) {
+            throw new RuntimeException(e);
+        }
+        assertDoesNotThrow(() -> {
+            reunion.finalizar();
+        });
+    }
+
+
     @AfterEach
     void tearDown() {
         reunion = null;

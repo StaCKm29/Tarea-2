@@ -42,10 +42,18 @@ abstract class Reunion {
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.listaInvitados = listaInvitados;
+
         this.organizador = listaInvitados.getFirst();
+
         this.almacenNotas = new ArrayList<>();
+
         this.retrasos = new ArrayList<>();
         this.totalAsistencias = new ArrayList<>();
+
+        this.empleadosAsistentes = new ArrayList<>();
+        this.empleadosAtrasados = new ArrayList<>();
+        this.empleadosAusentes = new ArrayList<>();
+
         Invitacion invitacion = new Invitacion();
         for (Empleado empleado : listaInvitados) {
             invitacion.enviarInvitacion(empleado);
@@ -53,7 +61,6 @@ abstract class Reunion {
     }
 
     public List<Empleado> obtenerAsistencias(){
-        empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
         }
@@ -65,7 +72,6 @@ abstract class Reunion {
      * @return Lista de ausentes a la reunión.
      */
     public List<Empleado> obtenerAusencias() {
-        empleadosAusentes = new ArrayList<>();
         for (Empleado empleado : listaInvitados) {
             boolean asistio = false;
             for (Asistencia asistencia : totalAsistencias) {
@@ -89,7 +95,6 @@ abstract class Reunion {
      * @return Lista de empleados que llegaron tarde a la reunión.
      */
     public List<Empleado> obtenerRetrasos(){
-        empleadosAtrasados = new ArrayList<>();
         for(Retraso retraso : retrasos){
             empleadosAtrasados.add(retraso.getEmpleado());
         }
