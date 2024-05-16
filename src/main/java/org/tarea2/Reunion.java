@@ -14,12 +14,11 @@ abstract class Reunion {
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio = null;
-    private Instant horaFin;
+    private Instant horaFin = null;
     private Duration duracionReal;
     private TipoReunion tipoReunion;
     private Empleado organizador;
     private float porcentajeAsistencia;
-    private int Total = 0;
     private List <Empleado> listaInvitados;
     private List <Empleado> empleadosAsistentes;
     private List <Empleado> empleadosAtrasados;
@@ -30,33 +29,52 @@ abstract class Reunion {
     private List <String> mensajes;
 
     /**
-     * Constructor de la clase Reunion
-     * @param tipoReunion Es el tipo de reunion (marketing, desarrollo, etc.)
-     * @param fecha Fecha de la reunión
-     * @param horaPrevista Hora prevista de la reunión
-     * @param duracionPrevista Duración prevista de la reunión
-     * @param listaInvitados Lista de empleados invitados a la reunión
+     * Constructor de la clase Reunion.
+     * @param tipoReunion Tipo de reunión.
+     * @param fecha Fecha de la reunión.
+     * @param horaPrevista Hora prevista de la reunión.
+     * @param duracionPrevista Duración prevista de la reunión.
+     * @param listaInvitados Lista de invitados a la reunión.
+     * @throws OverflowEnumException Excepción que se lanza si el tipo de reunión no es válido.
+     * @throws EmpleadoNullException Excepción que se lanza si se invita un empleado nulo.
      */
-    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados){
-        this.tipoReunion = TipoReunion.values()[tipoReunion];
+    public Reunion(int tipoReunion, Date fecha, Instant horaPrevista, Duration duracionPrevista, List <Empleado> listaInvitados) throws OverflowEnumException, EmpleadoNullException {
+        if(tipoReunion < 0 || tipoReunion >= TipoReunion.values().length){
+            throw new OverflowEnumException("El tipo de reunión no es válido.");
+        }else{
+            this.tipoReunion = TipoReunion.values()[tipoReunion];
+        }
+        //Iniciando parametros de reunión.
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.listaInvitados = listaInvitados;
+
+        // El organizador de la reunión será el primer empleado de la lista de invitados.
         this.organizador = listaInvitados.getFirst();
+
         this.almacenNotas = new ArrayList<>();
+
+        this.retrasos = new ArrayList<>();
+        this.totalAsistencias = new ArrayList<>();
         this.empleadosAsistentes = new ArrayList<>();
         this.empleadosAtrasados = new ArrayList<>();
         this.empleadosAusentes = new ArrayList<>();
-        this.retrasos = new ArrayList<>();
-        this.totalAsistencias = new ArrayList<>();
+
+        /**
+         * Se envía la invitación a los empleados de la lista de invitados.
+         */
         Invitacion invitacion = new Invitacion();
         for (Empleado empleado : listaInvitados) {
             invitacion.enviarInvitacion(empleado);
         }
     }
 
-    public List obtenerAsistencias(){
+    /**
+     * Método que obtiene la lista de asistentes a la reunión.
+     * @return Lista de asistentes a la reunión.
+     */
+    public List<Empleado> obtenerAsistencias(){
         empleadosAsistentes = new ArrayList<>();
         for (Asistencia as : totalAsistencias){
             empleadosAsistentes.add(as.getEmpleado());
@@ -68,7 +86,7 @@ abstract class Reunion {
      * Método que obtiene la lista de ausentes a la reunión.
      * @return Lista de ausentes a la reunión.
      */
-    public List obtenerAusencias() {
+    public List<Empleado> obtenerAusencias() {
         for (Empleado empleado : listaInvitados) {
             boolean asistio = false;
             for (Asistencia asistencia : totalAsistencias) {
@@ -91,7 +109,7 @@ abstract class Reunion {
      * Método que obtiene la lista de empleados que llegaron tarde a la reunión.
      * @return Lista de empleados que llegaron tarde a la reunión.
      */
-    public List obtenerRetrasos(){
+    public List<Empleado> obtenerRetrasos(){
         for(Retraso retraso : retrasos){
             empleadosAtrasados.add(retraso.getEmpleado());
         }
@@ -99,8 +117,8 @@ abstract class Reunion {
     }
 
     /**
-     * Método que obtiene la lista de retrasos
-     * @return Lista de retrasos de la reunion
+     * Método que obtiene la lista de retrasos.
+     * @return Lista de retrasos de la reunion.
      */
     public List<Retraso> getEmpleadosHoraRetraso(){
         return retrasos;
@@ -111,7 +129,7 @@ abstract class Reunion {
      * @return Total de asistentes a la reunión.
      */
     public int obtenerTotalAsistencia(){
-        return Total;
+        return totalAsistencias.size();
     }
 
     /**
@@ -119,7 +137,7 @@ abstract class Reunion {
      * @return Porcentaje de asistencia a la reunión.
      */
     public float obtenerPorcentajeAsistencia(){
-        porcentajeAsistencia = ((float)Total/listaInvitados.size())*100;
+        porcentajeAsistencia = ((float)totalAsistencias.size()/listaInvitados.size())*100;
         String porcentajeString = String.valueOf(porcentajeAsistencia).replace(',', '.');
         porcentajeAsistencia = Float.parseFloat(porcentajeString);
         return porcentajeAsistencia;
@@ -128,33 +146,53 @@ abstract class Reunion {
     /**
      * Método que calcula la duración real de la reunión.
      * @return Duración real de la reunión.
+     * @throws DuracionNullException Excepción que se lanza si la reunión no ha sido iniciada o finalizada.
      */
-    public Duration calcularTiempoReal(){
-        duracionReal = Duration.between(horaInicio, horaFin);
-        return duracionReal;
+    public Duration calcularTiempoReal() throws DuracionNullException {
+        if(horaInicio == null || horaFin == null){
+            throw new DuracionNullException("La reunión debe iniciar y finalizar primero. ");
+        }else {
+            duracionReal = Duration.between(horaInicio, horaFin);
+            return duracionReal;
+        }
     }
 
     /**
      * Método que inicia la reunión.
+     * @throws IniciarReunionIniciadaException Excepción que se lanza si la reunión ya ha sido iniciada.
      */
-    public void iniciar(){
-        horaInicio = Instant.now();
+    public void iniciar() throws IniciarReunionIniciadaException {
+        if(horaInicio != null){
+            throw new IniciarReunionIniciadaException("La reunión ya ha sido iniciada.");
+        }else{
+            horaInicio = Instant.now();
+        }
     }
 
     /**
      * Método que finaliza la reunión.
+     * @throws FinalizarReunionNoIniciadaException Excepción que se lanza si la reunión no ha sido iniciada.
      */
-    public void finalizar(){
-        horaFin = Instant.now();
+    public void finalizar() throws FinalizarReunionNoIniciadaException {
+        if(horaInicio == null) {
+            throw new FinalizarReunionNoIniciadaException("La reunión no ha sido iniciada.");
+        }
+        else{
+            horaFin = Instant.now();
+        }
     }
 
     /**
      * Método que añade un empleado a la reunión.
      * @param em Empleado a añadir a la reunión.
+     * @throws EmpleadoNoInvitadoException Excepción que se lanza si el empleado no ha sido invitado a la reunión.
+     * @throws ReunionYaFinalizoException Excepción que se lanza si la reunión ya ha finalizado.
      */
-    public void empleadoEntrando(Empleado em) throws EmpleadoNullException {
-        if (em == null) {
-            throw new EmpleadoNullException("El empleado no puede ser nulo");
+    public void empleadoEntrando(Empleado em) throws EmpleadoNoInvitadoException, ReunionYaFinalizoException {
+        if(!listaInvitados.contains(em)){
+            throw new EmpleadoNoInvitadoException("El empleado no ha sido invitado a la reunión.");
+        } else if (horaFin != null) {
+            throw new ReunionYaFinalizoException("La reunión ya finalizó.");
         } else {
             Asistencia asistio;
             if (horaInicio == null) {
@@ -165,7 +203,6 @@ abstract class Reunion {
                 totalAsistencias.add(asistio);
                 retrasos.add((Retraso) asistio);
             }
-            Total++;
         }
     }
 
@@ -173,13 +210,15 @@ abstract class Reunion {
     /**
      * Método que añade una nota a la reunión.
      * @param mensaje Mensaje de la nota.
+     * @throws MensajeNullException Excepción que se lanza si el mensaje es nulo.
      */
-    public void nuevaNota(String mensaje) throws MensajeNullException{
+    public void nuevaNota(String mensaje) throws MensajeNullException {
         if(mensaje == null){
             throw new MensajeNullException("El mensaje no puede ser nulo");
+        }else {
+            Nota nota = new Nota(mensaje);
+            almacenNotas.add(nota);
         }
-        Nota nota = new Nota(mensaje);
-        almacenNotas.add(nota);
     }
 
     /**
@@ -227,14 +266,6 @@ abstract class Reunion {
     }
 
     /**
-     * Método que obtiene la duración real de la reunión.
-     * @return La duración real de la reunión.
-     */
-    public Duration getDuracionReal(){
-        return duracionReal;
-    }
-
-    /**
      * Método que obtiene el tipo de reunión.
      * @return Tipo de reunión.
      */
@@ -247,4 +278,12 @@ abstract class Reunion {
      * @return Sala/enlace de la reunión.
      */
     public abstract String getSalaEnlace();
+
+    /**
+     * Método para obtener el organizador de la reunión.
+     * @return Organizador de la reunión.
+     */
+    public Empleado getOrganizador(){
+        return organizador;
+    }
 }

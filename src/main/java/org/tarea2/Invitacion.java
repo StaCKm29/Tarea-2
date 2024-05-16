@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Clase que representa una invitación a un evento.
  */
 public class Invitacion {
-    private Instant hora;
+    private Instant hora; //Hora a la que envía la invitación.
     private String tiempoFormateado;
 
     public Invitacion() {
@@ -17,11 +17,16 @@ public class Invitacion {
         this.tiempoFormateado = formatter.format(hora.atZone(ZoneId.systemDefault()));
     }
     /**
-     * Metodo que envia una invitación a un invitado.
-     * @param invitado Invitable a invitar.
+     * Método que envía una invitación a un invitado.
+     * @param invitado Cualquier clase que implemente la interfaz Invitable.
+     * @throws EmpleadoNullException Excepción que se lanza si se invita un empleado null.
      */
-    public void enviarInvitacion(Invitable invitado) {
-        invitado.invitar(tiempoFormateado);
+    public void enviarInvitacion(Invitable invitado) throws EmpleadoNullException{
+        if(invitado == null){
+            throw new EmpleadoNullException("El empleado es null.");
+        }else {
+            invitado.invitar(tiempoFormateado);
+        }
     }
     
 }

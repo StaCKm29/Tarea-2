@@ -1,7 +1,9 @@
 Informe de la reunión
 
-Fecha y hora de la reunión: Mon Jun 10 10:00:00 CLT 2024 2024-05-14T13:00:00Z
-El tipo de reunión fue: OTRO
+Fecha y hora de la reunión: 2024-05-15T14:30:00Z
+Inicio de la reunión: 2024-05-15T15:57:24.682639631Z Fin de la reunión: 2024-05-15T15:57:34.683789868Z
+Duración de la reunión: PT10.001150237S
+El tipo de reunión fue: MARKETING
 La sala de la reunión es: Sala 1
 
 Lista de Participantes: 

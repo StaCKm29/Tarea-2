@@ -8,8 +8,8 @@ public class Departamento implements Invitable{
     private List <Empleado> empleados = new ArrayList<>();
 
     /**
-     * Constructor de la clase Departamento
-     * @param nombre Nombre del departamento
+     * Constructor de la clase Departamento.
+     * @param nombre Nombre del departamento.
      */
     public Departamento(String nombre){
         this.nombre = nombre;
@@ -33,6 +33,7 @@ public class Departamento implements Invitable{
 
     /**
      * Método que invita a los empleados del departamento a un evento.
+     * @param hora Es la hora de la invitación.
      */
     @Override
     public void invitar(String hora) {
@@ -40,5 +41,13 @@ public class Departamento implements Invitable{
         for (Empleado empleado : empleados) {
             empleado.invitar(hora); 
         }
+    }
+
+    /**
+     * Método que devuelve una lista con los empleados del departamento.
+     * @return empleados Lista de los empleados.
+     */
+    public List<Empleado> getEmpleados(){
+        return empleados;
     }
 }
