@@ -14,6 +14,18 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class Main {
+    /**
+     * Método principal que ejecuta el programa.
+     * @param args Argumentos de la línea de comandos.
+     * @throws EmpleadoNullException Excepción para cuando el empleado es null.
+     * @throws MensajeNullException Excepción para cuando el mensaje es null.
+     * @throws DuracionNullException Excepción para cuando la duración de la reunión es null.
+     * @throws IniciarReunionIniciadaException Excepción para cuando se intenta iniciar una reunión ya iniciada.
+     * @throws FinalizarReunionNoIniciadaException Excepción para cuando se intenta finalizar una reunión que no ha sido iniciada.
+     * @throws OverflowEnumException Excepción para cuando el tipo de reunión no es válido.
+     * @throws EmpleadoNoInvitadoException Excepción para cuando un empleado no invitado quiera entrar a una reunión.
+     * @throws ReunionYaFinalizoException Excepción para cuando se intenta agregar un empleado a una reunión que ya finalizó.
+     */
     public static void main(String[] args) throws EmpleadoNullException, MensajeNullException, DuracionNullException, IniciarReunionIniciadaException, FinalizarReunionNoIniciadaException, OverflowEnumException, EmpleadoNoInvitadoException, ReunionYaFinalizoException {
         // Crear un objeto Date con año, mes y día
         Calendar calendar = Calendar.getInstance();

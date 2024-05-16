@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class Invitacion {
     private Instant hora; //Hora a la que envía la invitación.
     private String tiempoFormateado;
-
+    /**
+     * Constructor de la clase Invitacion.
+     */
     public Invitacion() {
         this.hora = Instant.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

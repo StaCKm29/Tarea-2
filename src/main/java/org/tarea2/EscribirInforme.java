@@ -1,8 +1,8 @@
 package org.tarea2;
 import java.io.*;
 import java.time.Duration;
-/*
-    * Clase que se encarga de escribir un informe de la reunión en un archivo de texto.
+/**
+ * Clase que se encarga de escribir un informe de la reunión en un archivo de texto.
  */
 public class EscribirInforme {
     private String nombreArchivo;

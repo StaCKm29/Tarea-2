@@ -5,6 +5,7 @@ package org.tarea2;
 public interface Invitable {
     /**
      * Enviar la invitacion con una hora predeterminada.
+     * @param hora Hora de la invitación.
      */
     void invitar(String hora);
 }

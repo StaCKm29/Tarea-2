@@ -2,7 +2,9 @@ package org.tarea2;
 
 import java.time.Duration;
 import java.time.Instant;
-
+/**
+ * Clase que representa un retraso de un empleado.
+ */
 public class Retraso extends Asistencia{
     private Instant horaLlegada; //Hora en que llegó tarde.
     private Instant horaInicio;
